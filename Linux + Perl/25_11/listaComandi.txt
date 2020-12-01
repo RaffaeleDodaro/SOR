@@ -1,0 +1,62 @@
+##############################
+#         ESERCIZIO 1        #
+##############################
+mkdir a a/b a/c a/d a/b/e a/b/f a/b/f/i
+
+#mi trovo nella cartella a
+touch b/f/i/index1.html
+cp file1.txt copiafile1.txt
+cp file1.txt b/
+cp copiafile1.txt b/
+mv b/f/i/index1.html b/f/i/home.html
+mv b/f/i/home.html b/f
+cp *.txt b
+cp ?doc* c
+cp -r f* b/e
+cd b/e
+mv f* ../f
+cd ../..
+wget https://www.google.it/
+wget --secure-protocol=auto https://www.mat.unical.it/informatica/HomePage
+rm -r b/f d
+
+##############################
+#         ESERCIZIO 2        #
+##############################
+chmod +rw a
+chmod -w d
+chmod o-r c
+chmod o+r f
+chmod o+r f
+chmod o-r e
+chmod g-r f
+chmod g+r i
+chmod o+r b
+chmod g+rwx b
+chmod o+r i
+chmod o-wx i
+
+##############################
+#         ESERCIZIO 3        #
+##############################
+ps -e | wc -l
+
+cat /etc/passwd | grep /bin/bash | wc -l > Ese3SecondoPunto.txt
+
+cat /etc/passwd | grep /bin/bash | cut -f 1,6 -d :
+
+cat /etc/passwd | sed -n '20,30p' > Esercizio3Punto4.txt
+
+#punto 5
+cat f1.txt > Esercizio3Punto5.txt
+cat f2.txt >> Esercizio3Punto5.txt
+cat f3.txt >> Esercizio3Punto5.txt
+sort Esercizio3Punto5.txt | uniq Esercizio3Punto5.txt >file.txt
+
+cat /etc/passwd | grep home | tac > Esercizio3Punto6.txt
+
+cat /home/raffaele/.bash_history | tail -n 4 | sort > Esercizio3Punto7.txt
+
+find /home -size +2M |wc -l  > Esercizio3Punto8.txt
+
+find -atime +4 -exec /bin/rm-r {} \;
