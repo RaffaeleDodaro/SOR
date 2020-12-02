@@ -5,6 +5,7 @@ use strict;
 print"inserisci stringa\n";
 my $stringa=<STDIN>;
 chomp($stringa);
+
 print"inserisci lettera\n";
 my $lettera=<STDIN>;
 chomp($lettera);
