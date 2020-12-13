@@ -20,7 +20,7 @@ class Pizzaiolo(Thread):
             seconds = random()
             sleep(seconds*ordine.quantita)
             ordine.prepara()
-            print("il pizzaiolo %s ha preparato l'ordine con id %d, %d pizze di tipo %s" % (
+            print("il pizzaiolo %s ha preparato l'ordine con id %d, %d pizze di tipo %d:%s" % (
                 self.getName(), ordine.id, ordine.quantita, ordine.tipoPizza))
 
             # step 3 --> inserisco l'ordine pronto nel buffer delle pizze

@@ -23,6 +23,7 @@ class Cliente(Thread):
 
             # step 4 --> il cliente controlla se l'ordine e' pronto; se non lo e' entra in un'attesa bloccante(c'e' una wait sul thread)
             self.pizzeria.getPizze(ordine)
+            print ("il cliente %s ha prelevato l'ordine con id %d" % (self.getName(),ordine.id))
 
             # step 5 --> il cliente mangia la pizza e poi va via
             sleep(randint(1,5))
