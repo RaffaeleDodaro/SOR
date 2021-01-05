@@ -115,14 +115,14 @@ class Tavolo:
         self.lock=Lock()
         self.condition=Condition(self.lock)
         
-    def prendiLockSimultaneo(posizione):
+    def prendiLockSimultaneo(self,posizione):
         with self.lock:
-            while(self.bacchetta[posizione].checkOccupata() or self.bacchetta[(posizione+1)%5].checkOccupata())
+            while(self.bacchetta[posizione].checkOccupata() or self.bacchetta[(posizione+1)%5].checkOccupata()):
                 self.cond.wait()
             self.bacchetta[posizione].prendiBacchetta()
             self.bacchetta[(posizione+1)%5].prendiBacchetta()
     
-    def mollaLockSimultaneo(posizione):#minu
+    def mollaLockSimultaneo(self,posizione):#minu
         with self.lock:
             self.bacchetta[posizione].lasciaBacchetta()
             self.bacchetta[(posizione+1)%5].lasciaBacchetta()
@@ -145,19 +145,19 @@ class Filosofo(Thread):
     
     def mangia(self):#per mangiare ho bisogno di prendere la bacchetta sx e dx
         
-        print f"il filosofo {self.getName()} vuole mangiare."
+        print(f"il filosofo {self.getName()} vuole mangiare.")
         
         #acquire di entrambe le bacchette
         self.t.prendiLockSimultaneo(self.posizione)
-        print f"il filosofo {self.getName()} ha le sue bacchette e mangia"
+        print(f"il filosofo {self.getName()} ha le sue bacchette e mangia")
         
         self.attesaCasuale(500)
         
         #release di entrambe le bacchette
-        print f"il filosofo {self.getName()} sta per lasciare le sue bacchette"
+        print(f"il filosofo {self.getName()} sta per lasciare le sue bacchette")
         self.t.mollaLockSimultaneo(self.posizione)
         
-        print f"il filosofo {self.getName()} termina di mangiare"
+        print(f"il filosofo {self.getName()} termina di mangiare")
         
     def run(self):
         while True:

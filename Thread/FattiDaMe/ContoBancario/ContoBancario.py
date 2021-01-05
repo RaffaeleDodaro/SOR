@@ -1,74 +1,98 @@
 from threading import Thread, Lock, Condition
-import random
+from random import randint
+from queue import Queue
 
-class Transazione():
-    def __init__(self, m, d, importo):
-        self.t = (m, d, importo)
+class Transazione:
+    def __init__(self, a, b, n):
+        self.t = (a, b, n)
 
-class ContoBancario(Thread):
-    idConto=0
+class ContoBancario:
+    numeroConto = 0
+
     def __init__(self):
-        self.idConto=ContoBancario.idConto
-        super().__init__()
-        self.saldo = random.randint(0,50)
-        self.elencoTransazioni = list()
+        self.numeroConto = ContoBancario.numeroConto
+        self.saldo = randint(0,50)
+        self.transazioni = Queue()
         self.lock = Lock()
-        ContoBancario.idConto+=1
-
-    def addTransazione(self, t:Transazione):
-            self.elencoTransazioni.append(t)
+        ContoBancario.numeroConto += 1
+        self.occupato = False
         
+    def addTransazione(self, t: Transazione):
+        self.transazioni.put(t)
+
+    def getOccupato(self):
+        return self.occupato
+
+    def prendi(self):
+        self.occupato = True
+
+    def lascia(self):
+        self.occupato = False
+
+    def __str__(self):
+        with self.lock:
+            return "Il conto " + str(self.numeroConto)
+
 class Conti(set):
     def __init__(self):
-        self.lock= Lock()
-    
-    def add(self,c:ContoBancario):
-        with self.lock:
-            super().add(c)
-
-class Banca(Thread):
-    def __init__(self):
-        super().__init__()
-        self.contiBancari = Conti()
         self.lock = Lock()
-        self.condition=Condition(self.lock)
+
+    def add(self, conto: ContoBancario):
+        with self.lock:
+            super().add(conto)
+
+class Banca:
+    def __init__(self):
+        self.conti = Conti()
+        self.lock = Lock()
+        self.condition = Condition(self.lock)
 
     def getSaldo(self, c: ContoBancario):
-            return c.saldo
+        return c.getSaldo()
 
-    def setSaldo(self, c: ContoBancario, n):
+    def addConto(self, c: ContoBancario):
+        self.conti.add(c)
+
+    def prendiLock(self, a: ContoBancario, b: ContoBancario):
         with self.lock:
-            c.saldo += n
+            # if one of the two elem are busy, the thread go to wait.
+            while (a.getOccupato() or b.getOccupato()):
+                self.condition.wait()
 
-    def addConto(self, c:ContoBancario):
-        self.contiBancari.add(c)
+            a.prendi()
+            b.prendi()
 
-    def trasferisci(self, a: ContoBancario, b: ContoBancario, n: int):
+    def lasciaLock(self, a: ContoBancario, b: ContoBancario):
         with self.lock:
-            if(self.getSaldo(self.a) < n):
-                return ValueError("saldo insufficiente")
+            self.condition.notifyAll()  # notifyAll because the thread take all of two elem
+            a.lascia()
+            b.lascia()
 
-            self.setSaldo(a, -n)
-            self.setSaldo(b, n)
-            t = Transazione(a, b, n)
-            a.addTransazione(self.t)
-            b.addTransazione(self.t)
-            return True
+    def trasferisci(self, a: ContoBancario, b: ContoBancario, n):
+        if (a.saldo < n):
+            return False
+
+        a.saldo -= n
+        b.saldo += n
+        t = Transazione(a, b, n)
+        a.addTransazione(t)
+        b.addTransazione(t)
+        return True
 
 
-class Cliente(Thread):
+class Client(Thread):
     def __init__(self, b, c):
-        super().__init__()
+        Thread.__init__(self)
         self.b = b
         self.c = c
 
     def getRand(self):
-        return self.c[random.randint(0,len(self.c))]
+        return self.c[randint(0,len(self.c))]
 
     def run(self):
         a = self.getRand()
         b = self.getRand()
-        n = random.randint(0,1000)
+        n = randint(0,20)
 
         self.b.prendiLock(a, b)
         if self.b.trasferisci(a, b, n):
@@ -77,23 +101,23 @@ class Cliente(Thread):
             print(f"Transazione da {a} a {b} non riuscita :(")
         self.b.lasciaLock(a, b)
 
-class CreaThread(Thread):
-    def __init__(self,b:Banca,c:ContoBancario):
-        super().__init__()
-        self.b=b
-        self.c=c
+class Generator(Thread):
+    def __init__(self, b, c):
+        Thread.__init__(self)
+        self.b = b
+        self.c = c
 
     def run(self):
         while True:
-            c=Cliente(self.b,self.c)
+            c = Client(self.b, self.c)
             c.start()
 
 
 
 b = Banca()
-c = [ContoBancario() for i in range(5)]
-for e in c:
-    b.addConto(e)
+c = [ContoBancario() for i in range(20)]
+for elem in c:
+    b.addConto(elem)
 
-ct = CreaThread(b, c)
-ct.start()
+g = Generator(b, c)
+g.start()
