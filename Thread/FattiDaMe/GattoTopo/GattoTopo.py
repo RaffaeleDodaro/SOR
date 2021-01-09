@@ -1,14 +1,9 @@
 from threading import Thread, Lock
 import random
-import time
-
-# Un topo e un gatto sono rappresentati all’interno di una stringa S di spazi, lunga L caratteri,
-# rispettivamente con il simbolo ‘.’ e ‘*‘.
-
+from time import sleep
+from typing import MappingView
 
 class Striscia():
-    
-
     def __init__(self):
         self.s = list()
         self.mangiato = False
@@ -71,7 +66,7 @@ class Display(Thread):
 
     def run(self):
         while not self.s.stampaStriscia():
-            time.sleep(0.020)
+            sleep(0.020)
 
 
 class Gatto(Thread):
@@ -84,7 +79,7 @@ class Gatto(Thread):
 
     def run(self):
         while not self.s.muoviGatto():
-            time.sleep(0.100)
+            sleep(0.100)
 
 
 class Topo(Thread):
@@ -97,7 +92,7 @@ class Topo(Thread):
 
     def run(self):
         while not self.s.muoviTopo():
-            time.sleep(0.050)
+            sleep(0.050)
 
 
 def main():
@@ -110,7 +105,7 @@ def main():
     jerry.start()
     tom.start()
     print("Started")
-    time.sleep(10)
+    sleep(10)
 
 
 if __name__ == "__main__":
