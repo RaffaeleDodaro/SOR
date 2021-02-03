@@ -43,7 +43,7 @@ class DelayedBlockingQueue:
         self.full = Condition(self.wlock)
         self.empty = Condition(self.wlock)
         self.sleepCondition = Condition(self.wlock)
-
+        self.emptyTutto = Condition(self.wlock)
         #
         # Coda degli elementi con ritardo scaduto e pronti al prelievo
             #
@@ -121,7 +121,7 @@ class DelayedBlockingQueue:
         with self.wlock:
             while len(self.coda)+len(self.scadenze) == self.maxSize:
                 self.full.wait()
-            self.empty.notify_all
+            self.emptyTutto.notifyAll()  
             quandoScade = time.time() + d
             self.scadenze[e] = quandoScade
 
@@ -144,7 +144,7 @@ class DelayedBlockingQueue:
 
     def veraPut(self, e):
         self.coda.insert(0, e)
-        self.empty.notify_all()
+        self.empty.notifyAll()
 
 #
     # * Prelievo da coda. Coincide sostanzialmente con il normalissimo codice di
@@ -181,18 +181,14 @@ class DelayedBlockingQueue:
                 return -1
     
     def takeLast(self):
-        #coda = [ ]
-        #scadenze={}
         with self.wlock:
-            while len(self.coda)+len(self.scadenze) == 0:
-                self.empty.wait()
-            
-            if len(self.scadenze)>0:
-                ultimo=self.scadenze[len(self.scadenze)-1]
-                del self.scadenze[len(self.scadenze)-1]
-                return ultimo
-            else:
-                self.coda.pop(0)
+            while(len(self.coda)==0 and len(self.scadenze)==0):
+                self.emptyTutto.wait()
+            valore=self.coda[-1]
+            return valore
+
+
+
 # estrae l’elemento che in questo momento risulta essere l’ultimo in coda, considerando sia gli elementi già
 # inseriti che gli elementi in scadenza. Se il buffer FIFO è completamente privo di elementi (sia già inseriti
 # che in scadenza), il metodo si pone in attesa dell’arrivo di un elemento. Se l’elemento che viene scelto per

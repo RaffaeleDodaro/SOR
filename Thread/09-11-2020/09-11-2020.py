@@ -165,7 +165,7 @@ def contaPrimiSeq(min: int, max: int) -> int:
 #       Miglioramo il codice
 #anziché dire un numero fisso di cpu da utilizzare , possiamo
 #usare un metodo che mi dice quante cpu ci sono a disposizione
-from threading import multiprocessing 
+import multiprocessing
 
 # Come funziona una barriera? la si crea e la si passa a tutti i thread che vogliamo sincronizzare
 class Barrier:

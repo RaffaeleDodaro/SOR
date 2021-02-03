@@ -226,7 +226,7 @@ class BlockingQueue2020:
 
     def show(self):
         self.lock.acquire()
-        val = [None] * self.dim;
+        val = [None] * self.dim
         
         for i in range(0,self.slotPieni):
             val[(self.out + i) % len(self.thebuffer)] = '*'
