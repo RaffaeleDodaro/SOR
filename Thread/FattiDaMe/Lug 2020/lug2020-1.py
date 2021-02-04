@@ -17,12 +17,6 @@ class Stampatore(Thread):
     #
     # Modificato per risolvere la domanda 1
     #
-    def run(self):
-        ancora = True
-        while(ancora):
-            (ancora, s) = self.SP.prelevaStampa()
-            if ancora:
-                print(s)
 
 
 """
@@ -79,8 +73,8 @@ class StampaPrioritaria:
         #
         # Aggiunte per implementare waitForPrint()
         #
-        self.aspettoStampa = []
-        self.condAttendiStampa = []
+        
+        
         """
             Qui riempio opportunamente C, condFull e attese
         """
@@ -198,29 +192,14 @@ class StampaPrioritaria:
         Soluzione alla domanda 1
     """
 
-    def stop(self):
-        with self.L:
-            self.statoDiArresto = True
-
     """
         Soluzione alla domanda 2
     """
 
-    def boost(self, p: int):
-        with self.L:
-            if p > 0:
-                e = self.C[p].pop(0)
-                self.stampa(e, p-1)
 
     """
         Soluzione alla domanda 3
     """
-
-    def waitForPrint(self, p: int):
-        with self.L:
-            self.aspettoStampa[p] = True
-            while(self.aspettoStampa[p]):
-                self.condAttendiStampa[p].wait()
 
 
 """
