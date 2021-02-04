@@ -22,22 +22,22 @@ def dprint(s):
  
 class DischiConcentrici():
 
- def __init__(self,size : int):
+    def __init__(self,size : int):
  #
  # Lock interno per la gestione della struttura dati
  #
-    self.lock = RLock()
-    self.waitCondition = Condition(self.lock)
- #
- # Tiene traccia della corrispondenza In e Out
- #
-    self.shiftAttuale = 0
+        self.lock = RLock()
+        self.waitCondition = Condition(self.lock)
     #
-    # I due array interni
+    # Tiene traccia della corrispondenza In e Out
     #
-    self.In = [1] * size
-    self.Out = [1] * size
-    self.size = size
+        self.shiftAttuale = 0
+        #
+        # I due array interni
+        #
+        self.In = [1] * size
+        self.Out = [1] * size
+        self.size = size
 
  #
  # Data in input una posizione in In, restituisce la posizione omologa in Out
@@ -90,6 +90,11 @@ class DischiConcentrici():
             return self.Out[self._om(i)]
         elif d == 1:
             return self.In[i]
+        
+    def oldget(self):
+        pass
+        
+
 
 class ManipolatoreDischi(Thread):
 
