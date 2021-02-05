@@ -31,7 +31,7 @@ for(my $i=0;$i<@listaFormati;$i++)
 
 open(my $fh,">","du.out");
 $somma=0;
-foreach $values(sort {$fileFiltrati{$b}<=>$fileFiltrati{$a} or {$a cmp $b}} keys %fileFiltrati )#or {$a cmp $b}
+foreach $values(sort {$fileFiltrati{$b}<=>$fileFiltrati{$a} or ($a cmp $b)} keys %fileFiltrati )#or {$a cmp $b}
 {
     $somma+=$fileFiltrati{$values};
     print "$values --> $fileFiltrati{$values}\n";
