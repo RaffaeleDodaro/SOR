@@ -3,7 +3,7 @@ $path=shift or die("manca path");
 $intero=shift or die("manca intero");
 $stringa=shift or die("manca la stringa");
 die "troppi parametri" if($#ARGV>=0);
-@risultato=qx(ls -l -R|egrep '$stringa');
+@risultato=qx(ls -l -R $path|egrep '$stringa');
 my $somma=0;
 %hash;
 open(my $fh,">","results.out") or die "non lo apro";
@@ -20,7 +20,7 @@ for(my $i=0;$i<@risultato;$i++){
 }
 foreach $size (sort{$hash{$a}<=>$hash{$b} or $a cmp $b} keys %hash)
 {
-    print $fh "$size --> $hash{$size}.\n"
+    print $fh "$size --> $hash{$size}.\n";
 }
 close $fh;
 print "Dimensione totale: $somma\n";

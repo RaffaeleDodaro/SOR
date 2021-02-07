@@ -60,7 +60,6 @@ class DelayedBlockingQueue:
         # Ritardo di default
         #
         self.delay = d
-        self.lock=RLock()
         self.condition=Condition(self.lock)
 
     #
@@ -115,7 +114,7 @@ class DelayedBlockingQueue:
                 self.full.wait()
             quandoScade = time.time() + d
             self.scadenze[e] = quandoScade
-
+            self.condition.notify()
     #
     # Per evitare eventuali risvegli spuri, usiamo un ciclo di controllo
     #
@@ -123,7 +122,7 @@ class DelayedBlockingQueue:
                 self.sleepCondition.wait(d)
                 d = time.time() - quandoScade
 
-
+        
         del self.scadenze[e]
         self.veraPut(e)
 
@@ -137,7 +136,6 @@ class DelayedBlockingQueue:
 #
     def veraPut(self, e):
         self.coda.insert(0,e)
-        self.condition.notifyAll()
         self.empty.notify_all()
 
 #
@@ -202,19 +200,15 @@ class DelayedBlockingQueue:
             print()
 
     def takeLast(self):
-        with self.lock:
-            while len(self.coda)+len(self.scadenze) == 0:
+        with self.wlock:
+            while(len(self.coda)+len(self.scadenze)==0):
                 self.condition.wait()
-            
-            self.full.notify()
-            if len(self.scadenze) > 0:     
-                ultimaPalluzza = max( self.scadenze, key=lambda x: self.scadenze[x] )
-                del self.scadenze[ultimaPalluzza]
-                return ultimaPalluzza
+            if len(self.scadenze>0):
+                elemento= max(self.scadenze, key=lambda x: self.scadenze[x])
+                self.scadenze.pop(elemento)
+                return elemento
             else:
                 return self.coda.pop(0)
-
-            
     '''
     Classi Consumer e Producer di test
     '''

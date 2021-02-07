@@ -15,7 +15,7 @@ class Stampatore(Thread):
     def run(self):
         ancora=True
         while(ancora):
-            (ancora,s)=self.SP.prelevaStampa()
+            ancora,s=self.SP.prelevaStampa()
             if ancora:
                 print(s)
  
@@ -71,18 +71,23 @@ class StampaPrioritaria:
         self.lock=RLock()
         
         self.condition=Condition(self.lock)
-
+        self.tanteCondition=[]
+        self.tantiBool=[]
         for i in range(0,self.NCODE):
             self.C.append([])
             self.condFull.append(Condition(self.L))
             self.attese.append(0)
+            self.tanteCondition.append(Condition(self.L))
+            self.tantiBool.append(False)
         """
         Creo e avvio l'unico thread stampatore
         """
         self.printer = Stampatore(self)
         self.printer.start()
         self.fermaStampa=False
+        self.basta=False
         self.attendiStampa=False
+
 
     """
     Metodo privato che mi restituisce len(C[0]) + len(C[1]) + len(C[2])
@@ -111,7 +116,7 @@ class StampaPrioritaria:
     """
     def stampa(self, s: str, prio: int):
         with self.L:
-            if(not self.fermaStampa):
+            if(not self.basta):
                 while len(self.C[prio]) == self.size:
                     self.condFull[prio].wait()
                 self.C[prio].append(s)
@@ -127,8 +132,8 @@ class StampaPrioritaria:
             """
             Attendo se non ci sono stampe in nessuna coda
             """
-            if(self.fermaStampa and self.__totLen()==0):
-                return (False,"")
+            if self.__totLen()==0 and self.basta:
+                return False,""
             else:
                 while self.__totLen() == 0:
                     self.condEmpty.wait()
@@ -164,24 +169,26 @@ class StampaPrioritaria:
                 """
                 Infine, estraggo un elemento da C[p] e lo restituisco
                 """
-                return self.C[p].pop(0)
+                self.tantiBool[p]=True
+                self.tanteCondition[p].notify()
+                return True,self.C[p].pop(0)
     
     def stop(self):
-        with self.lock:
-            self.fermaStampa=True
-    
-    def boost(self,p:int):
-        with self.lock:
-            if(p!=0):
-                elemento=self.C[p].pop(0)
-                self.stampa(elemento,p-1)
+        with self.L:
+            self.basta=True
 
+    def boost(self,p:int):
+        with self.L:
+            if(p>0):
+                if(len(self.C[p])>0):
+                    elemento=self.C[p].pop(0)
+                    self.stampa(elemento,p-1)
+    
     def waitForPrint(self,p:int):
-        # attende che avvenga una stampa
-        # di livello di priorità p e quindi esce
-        with self.lock:
-            while (not self.attendiStampa):
-                pass
+        with self.L:
+            while(not self.tantiBool[p]):
+                self.tanteCondition[p].wait()
+
             
 
 

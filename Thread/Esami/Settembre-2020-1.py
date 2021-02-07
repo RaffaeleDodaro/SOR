@@ -206,11 +206,12 @@ class DelayedBlockingQueue:
             while(len(self.coda)+len(self.scadenze)==0):
                 self.condition.wait()
             if(len(self.scadenze)>0):
-                elemento=max( self.scadenze, key=lambda x: self.scadenze[x] )
+                elemento=max(self.scadenze, key=lambda x: self.scadenze[x])
                 del self.scadenze[elemento]
                 return elemento
             else:
                 return self.coda.pop(0)
+
 
 '''
 Classi Consumer e Producer di test

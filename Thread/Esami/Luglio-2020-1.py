@@ -13,8 +13,8 @@ class Stampatore(Thread):
         self.SP = SP
 
     def run(self):
-        ancora=True
-        while(ancora):
+        ancoraStampe=True
+        while(ancoraStampe):
             (ancora,s) = self.SP.prelevaStampa()
             if(ancora):
                 print(s)
@@ -69,22 +69,20 @@ class StampaPrioritaria:
         Qui riempio opportunamente C, condFull e attese
         """
         self.stampaALivelloP=[]
+        self.conditionStampa=[]
         for i in range(0,self.NCODE):
             self.C.append([])
             self.condFull.append(Condition(self.L))
             self.attese.append(0)
-            self.stampaALivelloP.append=False
+            self.stampaALivelloP[i]=False
+            self.conditionStampa[i]=Condition(self.L)
         """
         Creo e avvio l'unico thread stampatore
         """
         self.printer = Stampatore(self)
         self.printer.start()
         self.fermati=False
-
-        self.lock=RLock()
-        self.condition=Condition(self.lock)
         
-
     """
     Metodo privato che mi restituisce len(C[0]) + len(C[1]) + len(C[2])
     """
@@ -112,10 +110,9 @@ class StampaPrioritaria:
     """
     def stampa(self, s: str, prio: int):
         with self.L:
-            if not self.fermati:
+            if(not self.fermati):
                 while len(self.C[prio]) == self.size:
                     self.condFull[prio].wait()
-                self.condition.notifyAll()
                 self.C[prio].append(s)
                 #print(f"{self.C[prio]}")
                 self.condEmpty.notify()
@@ -128,11 +125,10 @@ class StampaPrioritaria:
             """
             Attendo se non ci sono stampe in nessuna coda
             """
-            if self.fermati and self.__totLen==0:
+            if(self.fermati and self.__totLen() == 0):
                 return False,""
-            else:
-                while self.__totLen() == 0:
-                    self.condEmpty.wait()
+            while self.__totLen() == 0:
+                self.condEmpty.wait()
 
             """
             Ciclo sulle tre code partendo da quella a priorità più alta.
@@ -163,31 +159,29 @@ class StampaPrioritaria:
                     if len(self.C[p]) == self.size:
                         self.condFull[p].notify()
                     
-                    
                     self.stampaALivelloP[p]=True
+                    self.conditionStampa[p].notifyAll()
                     """
                     Infine, estraggo un elemento da C[p] e lo restituisco
                     """
                     return True, self.C[p].pop(0)
         
+
     def stop(self):
         with self.L:
             self.fermati=True
-
+    
     def boost(self,p:int):
         with self.L:
-            while(len(self.C[p])==0):
-                self.condition.wait()
-            if(p>0):
-                v=self.C[p].pop(0)
-                self.stampa(v,p-1)
+            if p>0:
+                if (len(self.C[p])>0):
+                    e = self.C[p].pop(0)
+                    self.stampa(e,p-1)
     
-    def waitForPrint(self, p:int):
-        with self.lock:
-            self.stampaALivelloP[p]=False
-            while (not self.stampaALivelloP[p]):
-                self.conditionWait[p].wait()
-
+    def waitForPrint(self,p:int):
+        with self.L:
+            while(not self.stampaALivelloP[p]):
+                self.conditionStampa[p].wait()
 
 """
 ClientThread è giusto una tipologia di thread di esempio che sorteggia una priorità casuale e produce stampe a quella priorità
