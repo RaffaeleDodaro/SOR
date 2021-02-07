@@ -36,16 +36,22 @@ class NumeroBasso:
                     print(f"Il vincitore è il thread {self.giocate[k][0]} che ha puntato il numero {k}")
                     return self.giocate[k][0]
             print("Non ci sono vincitori")
-            return 0
+            return 0 #gioco finito
 
     def puntaNumero(self, n : int):
         with self.lock:
             self.giocate.setdefault(n,[]).append(current_thread().ident)
             self.nGiocate += 1
             self.threadGioca.notify()
+    
+    
+    def puntaNumeroNuovo(self, n : int):
+        with self.lock:
+            self.giocate.setdefault(n,[]).append(current_thread().ident)
+            self.nGiocate += 1
 
 if __name__ == '__main__':
     gameManager = NumeroBasso()
     v = 1
-    while v != 0:
+    while v != 0: # il gioco finisce con v==0
         v = gameManager.gioca(10)
