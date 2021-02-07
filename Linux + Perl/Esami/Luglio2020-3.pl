@@ -12,7 +12,7 @@ while($input!=-1)
 foreach(@pid)
 {
     chomp;
-    open($fh,"<","/proc/$_/status");
+    open($fh,"<","/proc/$_/status") or die $!;
     $nome;
     while(my $line=<$fh>){
         
