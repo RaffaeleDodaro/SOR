@@ -10,12 +10,13 @@ if($tipo=~m/-c|-C/)
     %cpu;
     for(@output)
     {
-        if($_ =~ m/\d+\s+(\w+)\s+\d+\s+\d+\s+\d+\d+\s+\d+\d+\s+\d+\s+\w+\s+(\d+\.\d+)/)
+        if($_ =~ m/\d+\s+(\S+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\w+\s+(\d+.\d+)/)
         {
             $cpu{$1}+=$2;
         }
     }
-    print $fh "utente $utente CPU: $cpu{$utente} %\n";
+    print "utente $utente CPU: $cpu{$utente}\n";
+    print $fh "utente $utente CPU: $cpu{$utente} \n";
     foreach $user(sort{$cpu{$a}<=>$cpu{$b}} keys %cpu)
     {
         print $fh "utente $user CPU: $cpu{$user} %";
@@ -27,7 +28,7 @@ elsif($tipo=~m/-m|-M/)
     %memoria;
     for(@output)
     {
-        if($_ =~ m/\d+\s+(\w+)\s+\d+\s+\d+\s+\d+\d+\s+\d+\d+\s+\d+\s+\w+\s+(\d+\.\d+)/)
+        if($_ =~ m/\d+\s+(\w+)\s+\d+\s+\d+\s+\d+\d+\s+\d+\d+\s+\d+\s+\w+\s+\d+.\d+\s+(\d+.\d+)/)
         {
             $memoria{$1}+=$2;
         }
