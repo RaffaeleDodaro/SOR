@@ -8,7 +8,7 @@
 # implementazione:
 # 1)si dichiara array B di dimensione fissata [0---N-1]
 # come la facciamo la put? tieniamoci una variabile che si ricorda 
-# la prima cella disponibile => B[in]=c; i+=1;
+# la prima cella disponibile => B[i]=c; i+=1;
 # come la facciamo la get? possiamo usare una variabile che si 
 # ricorda da quale cella ho estratto l'ultima volta => 
 # outV=out; out+=1; return B[outV];
@@ -25,6 +25,7 @@
 # se faccio get faccio cont -= 1;
 # se cont==0 coda vuota
 # se cont==N coda piena
+
 # from threading import Thread
 # from random import random
 # from time import sleep
@@ -85,7 +86,7 @@
 
 # for c in consumers:
 #     c.start()
-# con il codice fino a riga 87:
+# con il codice fino a riga 88:
 #abbiamo problemi di thread safety pesantissimi perchè
 #può benissimo succedere che mentre un produttore sta
 #innocentemente inserendo un elemento arriva un altro produttore che ti
@@ -187,17 +188,30 @@ from threading import Condition, Thread, Lock
 from random import random
 from time import sleep
 
+
+
+
+# se buffer pieno? ci teniamo un contatore che conta quante palluzze 
+# ci sono dentro il buffer. se faccio put faccio slotPieni += 1.
+# se faccio get faccio slotPieni -= 1;
+# se slotPieni==0 coda vuota
+# se slotPieni==N coda piena
+
+
+
 class BlockingQueue2020:
     def __init__(self, dim):
         self.ins = 0
         self.out = 0
-        self.slotPieni = 0
+        self.slotPieni = 0 # contatore che conta quante palluzze ci sono
         self.dim=dim #dimensione del buffer
-        self.thebuffer=[None]*dim
+        self.thebuffer=[None]*dim #si dichiara array B di dimensione fissata [0---N-1]
         self.lock=Lock()
         self.full_condition=Condition(self.lock)
         self.empty_condition=Condition(self.lock)
 
+    # come la facciamo la put? tieniamoci una variabile che si ricorda 
+    # la prima cella disponibile => B[i]=c; i+=1;
     def put(self,c):
         with self.lock:
             while (self.slotPieni == len(self.thebuffer)):
@@ -205,17 +219,24 @@ class BlockingQueue2020:
 
             self.empty_condition.notifyAll()
             self.thebuffer[self.ins] = c
-            self.ins=(self.ins+1)% len(self.thebuffer)
+            self.ins=(self.ins+1)% len(self.thebuffer)# se sono arrivato al bordo destro con in? si riciclano le cellette 
+                                                        # vuote che sono rimaste a sx usando il modulo. quando incremento
+                                                        # in faccio in=(in+1)%N; 
             self.slotPieni += 1
 
+    # come la facciamo la get? possiamo usare una variabile che si 
+    # ricorda da quale cella ho estratto l'ultima volta => 
+    # outV=out; out+=1; return B[outV];
+    # out ""segue"" in e gli sta leggermente indietro
     def get(self):
         with self.lock:
             while self.slotPieni==0: #le wait vanno sempre circondate da while perché
-                        # quando ti svegli devi sempre vedere se davvero la situazione
-                        # che ti aveva posto in attesa adesso non vale più
+                                    # quando ti svegli devi sempre vedere se davvero la situazione
+                                    # che ti aveva posto in attesa adesso non vale più
                 self.empty_condition.wait()
             returnValue = self.thebuffer[self.out]
-            self.out = (self.out+1)% len(self.thebuffer)
+            self.out = (self.out+1)% len(self.thebuffer)    # cosa succede se out arriva al bordo dx? quando incremento
+                                                            # out faccio out=(out+1)%N
             self.slotPieni -=1
             self.full_condition.notifyAll()
             return returnValue

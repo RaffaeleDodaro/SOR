@@ -155,7 +155,7 @@ class Posto:
     
     #per risolvere il problema di riga 174
     def testaEOccupa(self):
-        with self.lock():
+        with self.lock:
             if self.occupato:
                 return False
             else:
