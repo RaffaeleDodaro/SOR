@@ -1,7 +1,9 @@
 from threading import RLock,Condition
 
 
-class BlockingSet(set):
+class BlockingSet(set): # set viene ereditata da python. Sets are used to store multiple items 
+                        # in a single variable.
+
     lock = RLock()
     condition= Condition(lock)
 

@@ -71,7 +71,7 @@ from random import randrange
 # filosofi =[Filosofo(tavolo,i) for i in range(5)] #creo un array di filosofi, i e' il numero che attribuiro' ad ogni filosofo
 # for f in filosofi:
 #     f.start() #faccio partire i 5 filosofi
-    #ho la situazione di foto1.jpg
+# ho la situazione di foto1.jpg
     
     
 #con il programma fino a riga 71 abbiamo una brutta cosa:

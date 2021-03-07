@@ -46,7 +46,7 @@
 #a riga 39 abbiamo 2 musicisti che suonano due spartiti diversi:
 #uno di asterischi e uno di trattini. come fanno a suonare? dipende
 #dallo scheduler.ricorda che abbiamo una sola cpu. in questo momento john
-#e al solo ready all'esecuzione, lo scheduler ne sceglie uno, ad 
+#e al sono ready all'esecuzione, lo scheduler ne sceglie uno, ad 
 #esempio john, allora a john viene dato il controllo e in questo momento
 #viene eseguito il suo run. ad un certo punto il guanto di tempo dedicato a 
 #john scade e quando finisce john viene congelato e sospeso.
