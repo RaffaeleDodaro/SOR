@@ -1,75 +1,69 @@
-from threading import Thread,Lock,Condition
+from threading import Thread,RLock,Condition
+from random import randrange,random
 from time import sleep
-from random import random,randint
-
+from queue import Queue
 
 class PivotBlockingQueue:
-
-    
-    def __init__(self, n:int) -> None:
-        self.queue=[]
+    def __init__(self,n) -> None:
         self.n=n
-        self.lock=Lock()
+        self.theBuffer=[]
+        self.lock=RLock()
         self.condition=Condition(self.lock)
-        self.prendo=False #se false prendo minimo
-                    #se true prendo max
+        self.criterio=0 # 0 = prendo il minimo
 
-    def take(self) -> int:
+    def individuaPivot(self):
+        elemento=self.theBuffer[0]
+        if self.criterio==0:
+            for i in self.theBuffer:
+                if self.theBuffer[i]<=elemento:
+                    elemento=i
+        elif self.criterio==1:
+            for i in self.theBuffer:
+                if self.theBuffer[i]>=elemento:
+                    elemento=i
+        return elemento
+
+    def take(self):
         with self.lock:
-            while len(self.queue)<2:
+            while len(self.theBuffer)<2:
                 self.condition.wait()
-            
-            self.rimuoviPivot()
-            return self.queue.pop()
-
-    def rimuoviPivot(self):
-        pos=0
-        min=10000000
-        max=0
-        if(self.prendo==True):
-            for i in self.queue:
-                if(max<self.queue[i]):
-                    max=self.queue[i]
-                    pos=i
-
-        if(self.prendo==False):
-            for i in self.queue:
-                if(min>self.queue[i]):
-                    min=self.queue[i]
-                    pos=i
-
-        self.queue.remove(pos)
+            self.theBuffer.pop(self.individuaPivot())
+            return self.theBuffer.pop()
 
     def put(self,t:int):
         with self.lock:
-            while(len(self.queue) == self.n):
-                self.rimuoviPivot()
-            
-            self.queue.append(t)
-            if len(self.queue)==2:
-                self.condition.notify()
-
-
-    def setCriterioPivot(self,minMax:bool):
-        with self.lock:
-            if minMax == True:
-                prendo=False
+            if len(self.theBuffer) == self.n:
+                # individua ed elimina l’elemento PIVOT,
+                # quindi inserisce subito l’elemento T
+                indice=self.individuaPivot()
+                self.theBuffer.pop(indice)
             else:
-                prendo=True
+                self.theBuffer.append(t)
+            
+            if(len(self.theBuffer)>1):
+                self.condition.notifyAll()
+
+    def setCriterioPivot(self, minMax:bool):
+        with self.lock:
+            if minMax:
+                self.criterio=0
+            else:
+                self.criterio=1
+
 
 class Operator(Thread):
-    def __init__(self,c) -> None:
-        super().__init__()
-        self.coda=c
-    
+    def __init__(self,p) -> None:
+        super().__init__() 
+        self.p=p
     def run(self):
         for i in range(1000):
             sleep(random())
-            self.coda.put(randint(-100,100))
+            self.p.put(randrange(0,50))
             sleep(random())
+            self.p.take()
 
-if __name__ == '__main__':
-    coda=PivotBlockingQueue(10)
-    operatori = [Operator(coda) for i in range(50)] 
-    for o in operatori:
-        o.start()
+
+p=PivotBlockingQueue(10)
+o=[Operator(p) for i in range(50)]
+for op in o:
+    op.start()

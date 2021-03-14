@@ -45,3 +45,47 @@ else {
     die "Not a valid option $option !";
 }
 
+# #!/usr/bin/perl
+# $options=shift or die $!;
+# $path=shift or die $!;
+
+# @tuttiFile=qx(ls -R $path)
+# if($options eq "-c")
+# {
+#     die $! if($#ARGV>=0);
+#     %array;
+#     for(@tuttiFile)
+#     {
+#         if(m/\.(\w+)\.srt/)
+#         {
+#             $array{$1}+=1;
+#         }
+#     }
+
+#     @sorted=sort{$array{$b}<=>$array{$a} or $a cmp $b}keys %array;
+#     open(my $fh,">","output.txt")
+#     for(@sorted)
+#     {
+#         print $fh "$_ - $array{$_} ";
+#         print "$_ - $array{$_}";
+#     }
+#     close $fh or die $!;
+# }
+# elsif($options eq "-r")
+# {
+#     $str=shift or die $!;
+#     if($str=~m/\/(.+)\/(.+)\//)
+#     {
+#         $str1=$1
+#         $str2=$2
+#         for(@tuttiFile)
+#         {
+#             $vecchioNome=$_;
+#             if(m/($str1)\s+\w+/)
+#             {
+#                 $_=~m/$str1/$str2/g;
+#                 qx{mv $vecchioNome $_};
+#             }
+#         }
+#     }
+# }

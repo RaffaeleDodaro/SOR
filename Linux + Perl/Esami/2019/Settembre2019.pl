@@ -4,13 +4,11 @@ $username;
 if($opzione=~m/-user/)
 {
     $username=shift or die $!;
-    print "$username\n";
 }
 $nome_file=shift or die $!;
-
+open($fh,"<",$nome_file);
 if($opzione=~m/-ip/)
 {
-    open($fh,"<",$nome_file);
     %ip_tentativi;
     while(<$fh>)
     {
@@ -21,7 +19,7 @@ if($opzione=~m/-ip/)
         }
         chomp;
     }
-    close $fh;
+    
     foreach $tentativi(sort{$ip_tentativi{$b}<=>$ip_tentativi{$a}} keys %ip_tentativi)
     {
         print "$tentativi --> $ip_tentativi{$tentativi}\n";
@@ -29,7 +27,6 @@ if($opzione=~m/-ip/)
 }
 elsif($opzione=~m/-user/)
 {
-    open($fh,"<",$nome_file);
     $accessi=0;
     @date;
     while(<$fh>)
@@ -41,14 +38,14 @@ elsif($opzione=~m/-user/)
             push(@date, $1);
         }        
     }
-    close $fh;
-    open($fh,">>","nuovoFile.txt");
+    open($fh2,">>","nuovoFile.txt");
 
-    print $fh "$username - $accessi\n";
+    print $fh2 "$username - $accessi\n";
     for($i=0;$i<@date;$i++)
     {
-        print $fh @date[$i]."\n";
+        print $fh2 @date[$i]."\n";
     }
 
-    close $fh;
+    close $fh2;
 }
+close $fh;
