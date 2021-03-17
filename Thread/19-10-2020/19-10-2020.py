@@ -217,7 +217,7 @@ class BlockingQueue2020:
             while (self.slotPieni == len(self.thebuffer)):
                 self.full_condition.wait()
 
-            self.empty_condition.notifyAll()
+            self.empty_condition.notifyAll()    # mi serve per dire che la queue non è più vuota
             self.thebuffer[self.ins] = c
             self.ins=(self.ins+1)% len(self.thebuffer)# se sono arrivato al bordo destro con in? si riciclano le cellette 
                                                         # vuote che sono rimaste a sx usando il modulo. quando incremento
@@ -230,18 +230,19 @@ class BlockingQueue2020:
     # out ""segue"" in e gli sta leggermente indietro
     def get(self):
         with self.lock:
-            while self.slotPieni==0: #le wait vanno sempre circondate da while perché
+            while self.slotPieni==0:# le wait vanno sempre circondate da while perché
                                     # quando ti svegli devi sempre vedere se davvero la situazione
                                     # che ti aveva posto in attesa adesso non vale più
                 self.empty_condition.wait()
             returnValue = self.thebuffer[self.out]
             self.out = (self.out+1)% len(self.thebuffer)    # cosa succede se out arriva al bordo dx? quando incremento
-                                                            # out faccio out=(out+1)%N
+                                                            # out faccio out=(out+1)%N.
+                                                            # mi serve solo quando ho un buffer circolare, altrimenti no
             self.slotPieni -=1
-            self.full_condition.notifyAll()
+            self.full_condition.notifyAll() #mi serve per dire che la queue non è più piena
             return returnValue
 
-        #RICORDA L'ordine delle operazioni all'interno di un lock non è importante 
+        # RICORDA L'ordine delle operazioni all'interno di un lock non è importante 
         # perché posso fare tutto quello che voglio sula struttura dati senza farmi 
         # problemi tanto il lock ce l'ho io e quello che sto facendo non lo vedrà nessuno
 

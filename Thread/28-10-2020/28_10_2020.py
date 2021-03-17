@@ -100,7 +100,7 @@ class Bacchetta:
         self.lock=Lock()
         self.occupata=False
 
-    def checkOccupata():
+    def checkOccupata(self):
         return self.occupata
 
     def prendiBacchetta(self):
