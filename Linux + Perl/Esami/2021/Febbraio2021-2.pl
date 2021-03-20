@@ -10,12 +10,10 @@ while(<$fh>)
 {
     if(m/IP\s+(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}).(\d+)\s>\s$ip\.$porta/)
     {
-        print "$1\n";
         $array{$1}+=1
     }
 }
 close $fh;
-
 open(my $fh,">","output.log") or die $!;
 my @sorted= sort{$array{$b}<=>$array{$a} }keys %array;
 foreach(@sorted)

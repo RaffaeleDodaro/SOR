@@ -1,40 +1,29 @@
 #!/usr/bin/perl
-$formato=shift or die $!;
-$percorso=".";
-if($#ARGV >= 0)
+$formati=shift or die $!;
+$path = ".";
+$path = shift or die $! if ($#ARGV >=0);
+$f=$1 if($formati =~ m/--format=(.+)/);
+@array=split(',', $f);
+@file=qx(du -ka $path);
+%hash;
+$somma=0;
+foreach($i=0;$i<@array;$i++)
 {
-    $percorso=shift or die $!;
-}
-# die $! if($#ARGV >= 0);
-$formato=~m/=(.+)+/;
-$formato=$1;
-
-@listaFormati=split(/,/, $formato);
-
-@daFiltrare=qx(du -ka $percorso);
-
-%fileFiltrati;
-
-for(my $i=0;$i<@listaFormati;$i++)
-{
-    $f=@listaFormati[$i];
-    $somma=0;
-    for(@daFiltrare)
+    foreach(@file)
     {
-        if($_ =~ m/(\d+).+(\.$f)/)
+        if(m/(\d+)\s+.+\.($array[$i])/)
         {
-           $somma+=$1;
+            $hash{$array[$i]}+=$1;
+            $somma+=$1;
         }
     }
-    $fileFiltrati{$f}=$somma;
 }
 
-open(my $fh,">","du.out");
-$somma=0;
-foreach $values(sort {$fileFiltrati{$b}<=>$fileFiltrati{$a} or ($a cmp $b)} keys %fileFiltrati )#or {$a cmp $b}
+@sorted=sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys % hash;
+foreach(@sorted)
 {
-    $somma+=$fileFiltrati{$values};
-    print "$values --> $fileFiltrati{$values}\n";
+    print "Estensione: $_    $hash{$_}Kb\n";
 }
-print $fh "$somma\n";
-close $fh;
+open($fh,">","du.out");
+print $fh "$path $somma";
+close($fh);
