@@ -2,42 +2,40 @@
 die "troppi argomenti" if($#ARGV>=2);
 $tipo= shift or die $!;
 $utente = shift or die $!;
-
 open($fh,">","stat.log");
 @output=`top -n1 -b`;
+%array;
 if($tipo=~m/-c|-C/)
 {
-    %cpu;
     for(@output)
     {
-        if($_ =~ m/\d+\s+(\S+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\w+\s+(\d+.\d+)/)
+        if($_ =~ m/\d+\s+(\w+).+\s+(\d+\,\d+)\s+(\d+\,\d+)/)
         {
-            $cpu{$1}+=$2;
+            $array{$1}+=$2;
         }
     }
-    print "utente $utente CPU: $cpu{$utente}\n";
-    print $fh "utente $utente CPU: $cpu{$utente} \n";
-    foreach $user(sort{$cpu{$a}<=>$cpu{$b}} keys %cpu)
+    print $fh "utente $utente CPU: $array{$utente}%\n";
+    foreach $user(sort{$array{$b}<=>$array{$a}} keys %array)
     {
-        print $fh "utente $user CPU: $cpu{$user} %";
+        print $fh "utente $user CPU: $array{$user}%\n";
         last;
     }
 }
 elsif($tipo=~m/-m|-M/)
 {
-    %memoria;
     for(@output)
     {
-        if($_ =~ m/\d+\s+(\w+)\s+\d+\s+\d+\s+\d+\d+\s+\d+\d+\s+\d+\s+\w+\s+\d+.\d+\s+(\d+.\d+)/)
+        if($_ =~ m/\d+\s+(\w+).+\s+\d+\,\d+\s+(\d+\,\d+)/)
         {
-            $memoria{$1}+=$2;
+            $array{$1}+=$2;
         }
     }
-    print $fh "utente $utente Memoria: $memoria{$utente} %\n";
-    foreach $user(sort{$memoria{$a}<=>$memoria{$b}} keys %memoria)
+    print $fh "utente $utente Mem: $array{$utente}%\n";
+    foreach $user(sort{$array{$b}<=>$array{$a}} keys %array)
     {
-        print $fh "utente $user CPU: $memoria{$user} %";
+        print $fh "utente $user Mem: $array{$user}%\n";
         last;
     }
 }
+else {die $!;}
 close $fh;
