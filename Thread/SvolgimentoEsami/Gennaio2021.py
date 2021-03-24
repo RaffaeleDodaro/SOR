@@ -88,17 +88,6 @@ class DischiConcentrici():
             elif v != 0:
                 self.waitCondition.notifyAll()
     
-    def wset(self, i: int, v: int, d: int):
-        while ((d == 0 and self.In[i] == v) or 
-                    (d == 1 and self.Out[self._om(i)] == v)):
-                    self.waitCondition.wait()
-        
-        if d == 0:
-            self.Out[self._om(i)] = v
-        else:
-            self.In[i] = v
-        self.waitCondition.notifyAll()
-        
 
     def get(self, i: int, d: int):
         with self.lock:
@@ -110,18 +99,21 @@ class DischiConcentrici():
             return self.Out[self._om(i)]
         elif d == 1:
             return self.In[i]
-
-    def oldget(self, i: int, d: int):
-        with self.lock:
-            backup = self.shiftAttuale
-            while backup % self.size != self.shiftAttuale % self.size or (d == 0 and self.Out[self._om(i)] == 0) or (d == 1 and self.In[i] == 0):
-                dprint("In attesa")
-                self.waitCondition.wait()
-        dprint("Risvegliato")
-        if d == 0:
-            return self.Out[self._om(i)]
-        elif d == 1:
-            return self.In[i]
+""" 
+Si osservi che il codice del metodo get(i,d) non è
+robusto rispetti a eventuali operazioni di shift
+avvenute durante la fase di attesa bloccante. In
+particolare, supponi che un certo thread T invochi
+l’operazione get(k,0) e si blocchi in
+attesa, e che nel frattempo un thread S modifichi il valore di shiftAttuale passando dal valore precedente n a un
+nuovo valore m.
+Quando T uscirà dalla fase di attesa bloccante, get(k,0) restituirà il valore di Out[(k + m) % self.size],
+anzichè Out[(i + n) % self.size].
+Si scriva una versione del metodo get denominata oldget tale per cui, nel caso shiftAttuale variasse durante una
+eventuale fase di attesa bloccante, l’attesa bloccante continui in ogni caso fino a che shiftAttuale non torna al valore
+che aveva nel momento in cui oldget era stata inizialmente invocata. Si modifichino le altre parti del codice
+pre-esistente laddove lo si ritenga necessario.
+"""
 
 
 class ManipolatoreDischi(Thread):

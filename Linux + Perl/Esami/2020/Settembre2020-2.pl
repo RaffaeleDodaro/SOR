@@ -2,7 +2,7 @@
 $formati=shift or die $!;
 $path = ".";
 $path = shift or die $! if ($#ARGV >=0);
-$f=$1 if($formati =~ m/--format=(.+)/);
+$f=$1 if($formati =~ m/--formats=(.+)/);
 @array=split(',', $f);
 @file=qx(du -ka $path);
 %hash;

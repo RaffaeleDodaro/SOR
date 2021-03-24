@@ -13,11 +13,9 @@ class Stampatore(Thread):
         self.SP = SP
 
     def run(self):
-        ancoraStampe=True
-        while(ancoraStampe):
-            (ancora,s) = self.SP.prelevaStampa()
-            if(ancora):
-                print(s)
+        while(True):
+            s = self.SP.prelevaStampa()
+            print(s)
 
 
 """
@@ -68,14 +66,10 @@ class StampaPrioritaria:
         """
         Qui riempio opportunamente C, condFull e attese
         """
-        self.stampaALivelloP=[]
-        self.conditionStampa=[]
         for i in range(0,self.NCODE):
             self.C.append([])
             self.condFull.append(Condition(self.L))
             self.attese.append(0)
-            self.stampaALivelloP[i]=False
-            self.conditionStampa[i]=Condition(self.L)
         """
         Creo e avvio l'unico thread stampatore
         """
@@ -158,30 +152,12 @@ class StampaPrioritaria:
                     """
                     if len(self.C[p]) == self.size:
                         self.condFull[p].notify()
-                    
-                    self.stampaALivelloP[p]=True
-                    self.conditionStampa[p].notifyAll()
+
                     """
                     Infine, estraggo un elemento da C[p] e lo restituisco
                     """
-                    return True, self.C[p].pop(0)
+                    return self.C[p].pop(0)
         
-
-    def stop(self):
-        with self.L:
-            self.fermati=True
-    
-    def boost(self,p:int):
-        with self.L:
-            if p>0:
-                if (len(self.C[p])>0):
-                    e = self.C[p].pop(0)
-                    self.stampa(e,p-1)
-    
-    def waitForPrint(self,p:int):
-        with self.L:
-            while(not self.stampaALivelloP[p]):
-                self.conditionStampa[p].wait()
 
 """
 ClientThread è giusto una tipologia di thread di esempio che sorteggia una priorità casuale e produce stampe a quella priorità

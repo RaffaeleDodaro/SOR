@@ -123,7 +123,6 @@ class DelayedBlockingQueue:
                 self.sleepCondition.wait(d)
                 d = time.time() - quandoScade
 
-
             del self.scadenze[e]
             self.veraPut(e)
 
@@ -138,6 +137,7 @@ class DelayedBlockingQueue:
     def veraPut(self, e):
         self.coda.insert(0,e)
         self.empty.notify_all()
+ 
 
     #
     # * Prelievo da coda. Coincide sostanzialmente con il normalissimo codice di
@@ -201,17 +201,6 @@ class DelayedBlockingQueue:
 
             print()
     
-    def takeLast(self):
-        with self.lock:
-            while(len(self.coda)+len(self.scadenze)==0):
-                self.condition.wait()
-            if(len(self.scadenze)>0):
-                elemento=max(self.scadenze, key=lambda x: self.scadenze[x])
-                del self.scadenze[elemento]
-                return elemento
-            else:
-                return self.coda.pop(0)
-
 
 '''
 Classi Consumer e Producer di test

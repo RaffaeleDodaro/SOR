@@ -1,45 +1,38 @@
 #!/usr/bin/perl
 $path=shift or die $!;
-$parametro=shift or die $!;
-$stringa=shift or die $!;
-die $! if($#ARGV>0);
-
-open($fh,">","results.out");
-$sommaTotale=0;
-if($parametro eq "-g"){
-    @file=qx(ls -lR $path | egrep "$stringa"|awk '{print $4}' | sort);
-    %gruppoSize;
-    
-    foreach(@file)
+$par=shift or die $!;
+die $! if($par ne "-g" and $par ne "-u");
+$str=shift or die $!;
+@file=qx(ls -laR | grep "$str");
+%hash;
+$somma=0;
+foreach(@file){
+    if($par =~m/-u/)
     {
-        if(m/-\w+\s?\d\s?\w+\s+(\w+)\s+(\d+)\s+/)
+        if(m/\d+\s+(\S+)\s+\S+\s+(\d+)\s+\w+\s+/)
         {
-            $gruppoSize{$1}+=$2;
-            $sommaTotale+=$2;
+            $somma+=$2;
+            $hash{$1}+=$2;
         }
     }
-    @sorted=sort{ $gruppoSize{$b}<=>$gruppoSize{$a} or {$a}cmp{$b}} keys %gruppoSize;
-    foreach(@sorted)
+    elsif($par =~m/-g/)
     {
-        print $fh "$_ --> $gruppoSize{$_}";
-    }
-}
-elsif($parametro eq "-u"){
-    %utenteSize;
-    @file=qx(ls -lR $path | egrep "$stringa"|awk '{print $3}' | sort);
-    foreach(@file)
-    {
-        if(m/-\w+\s?\d\s?(\w+)\s+\w+\s+(\d+)\s+/)
+        if(m/\d+\s+\S+\s+(\S+)\s+(\d+)\s+\w+\s+/)
         {
-            $utenteSize{$1}+=$2;
-            $sommaTotale+=$2;
+            $somma+=$2;
+            $hash{$1}+=$2;
         }
     }
-    @sorted=sort{ $utenteSize{$b}<=>$utenteSize{$a} or {$a}cmp{$b}} keys %utenteSize;
-    foreach(@sorted)
-    {
-        print $fh "$_ --> $utenteSize{$_}";
+    else {
+        die $!;
     }
 }
-print $fh "\nsomma totale --> $sommaTotale";
+open(my $fh,">","results.out");
+@sorted=sort{$hash{$b}<=>$hash{$a} or $a cmp$ b} keys %hash;
+foreach(@sorted)
+{
+    print $fh "$_ $hash{$_}\n";
+}
+print $fh "---------------\n";
+print $fh "Spazio totale occupato: $somma\n";
 close $fh;

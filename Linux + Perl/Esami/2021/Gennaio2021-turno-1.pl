@@ -22,5 +22,6 @@ foreach $size (sort{$hash{$a}<=>$hash{$b} or $a cmp $b} keys %hash)
 {
     print $fh "$size --> $hash{$size}.\n";
 }
+print $fh "------------------------------";
+print $fh "Dimensione totale: $somma\n";
 close $fh;
-print "Dimensione totale: $somma\n";
