@@ -13,9 +13,11 @@ class Stampatore(Thread):
         self.SP = SP
 
     def run(self):
-        while(True):
-            s = self.SP.prelevaStampa()
-            print(s)
+        ancora=True
+        while(ancora):
+            (ancora,s) = self.SP.prelevaStampa()
+            if(ancora):
+                print(s)
 
 
 """
@@ -66,16 +68,22 @@ class StampaPrioritaria:
         """
         Qui riempio opportunamente C, condFull e attese
         """
+        self.stampaP=[]
+        self.tanteCondition=[]
         for i in range(0,self.NCODE):
             self.C.append([])
             self.condFull.append(Condition(self.L))
             self.attese.append(0)
+            self.stampaP.append(True)
+            self.tanteCondition.append(Condition(self.L))
         """
         Creo e avvio l'unico thread stampatore
         """
         self.printer = Stampatore(self)
         self.printer.start()
+
         self.fermati=False
+        
         
     """
     Metodo privato che mi restituisce len(C[0]) + len(C[1]) + len(C[2])
@@ -152,11 +160,28 @@ class StampaPrioritaria:
                     """
                     if len(self.C[p]) == self.size:
                         self.condFull[p].notify()
-
+                    self.stampaP[p]=False
+                    self.tanteCondition[p].notifyAll()
                     """
                     Infine, estraggo un elemento da C[p] e lo restituisco
                     """
-                    return self.C[p].pop(0)
+                    return True, self.C[p].pop(0)
+    
+    def stop(self):
+        with self.L:
+            self.fermati=True
+    
+    def boost(self,p):
+        with self.L:
+            if(p>0):
+                e=self.C[p].pop(0)
+                self.stampa(e,p-1)
+
+    def waitForPrint(self,p):
+        with self.L:
+            while(self.stampaP[p]):
+                self.tanteCondition[p].wait()
+
         
 
 """

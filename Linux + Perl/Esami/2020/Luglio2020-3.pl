@@ -2,7 +2,7 @@
 @pid;
 print("inserisci pid: \n");
 $input=<STDIN>;
-while($input!=-1)
+while($input ne "-1")
 {
     push @pid,$input;
     $input=<STDIN>;
@@ -22,8 +22,7 @@ foreach(@pid)
         }
         if($line=~m/(?i)VmPeAK:\s+(\d+)/)
         {
-            $peak=$1;
-            $nomeVmPeak{$nome}+=$peak;
+            $nomeVmPeak{$nome}+=$1;
         }
     }
     close $fh;

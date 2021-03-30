@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 $valore=<STDIN>;
 @tantiValori;
-while ($valore != -1) {
+while ($valore ne "-1") {
     push @tantiValori, $valore;
     $valore=<STDIN>;
 }
@@ -30,3 +30,4 @@ foreach(@sorted)
 {
     print "$_ --> $nomeVmRSS{$_}";
 }
+qx(top -n1);
