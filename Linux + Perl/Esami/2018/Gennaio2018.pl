@@ -1,68 +1,6 @@
 #!/usr/bin/perl
-$path = shift or die $!;
-$s=shift or die $!;
-$f=shift or die $!;
-die "f<s" if($f<$s);
-open(my $fh,"<",$path);
-@filtrati;
-while (my $line=<$fh>) {
-    chomp $_;
-    if($line=~m/(.+)\s+IP\s+(\d+.\d+.\d+.\d+.\d+)\s+>\s+(\d+.\d+.\d+.\d+.\d+):\s+(\w+)/)
-    {
-        if($1>=$s && $1<=$f)
-        {
-            push @filtrati, $line;
-        }
-    }
-}
-close $fh;
-open($udp,">","udp.log");
-$s=0;
-foreach(@filtrati)
-{
-    chomp;
-    $copia=$_;
-    $copia=~m/(.+)\s+IP\s+(\d+.\d+.\d+.\d+.\d+)\s+>\s+(\d+.\d+.\d+.\d+.\d+):\s+(\w+)/;
-    print $udp "$1 --> $2 > $3\n";
-    $s+=1;
-}
-print $udp "Totale: $s\n";
-close $udp;
-@sorted=sort{$b cmp $a}@filtrati;
-open($flags,">","flags.log");
-$s=0;
-foreach(@sorted)
-{
-    chomp;
-    $copia=$_;
-    $copia=~m/(.+)\s+IP\s+(\d+.\d+.\d+.\d+.\d+)\s+>\s+(\d+.\d+.\d+.\d+.\d+):\s+(\w+)/;
-    if($4 ne "UDP")
-    {
-        print $flags "$1 --> $2 > $3\n";
-        $s+=1;
-    }
-}
-print $flags "Totale: $s\n";
-close $flags;
 
-
-
-
-
-
-
-
-
-
-
-
-
-##############################
-#       versione prof        #
-##############################
-#!/usr/bin/perl
-
-########### ESEGUO I CONTROLLI PIÃ™ BANALI SUGLI ARGOMENTI IN INPUT ############
+########## ESEGUO I CONTROLLI PIÃ™ BANALI SUGLI ARGOMENTI IN INPUT ############
 die "Too much parameters in input !" if ($#ARGV > 2);
 my $dump_filename = shift || die "Few parameters in input !";
 my $start = shift || die "Few parameters in input !";

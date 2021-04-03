@@ -42,10 +42,6 @@ class DischiConcentrici():
         self.In = [1] * size
         self.Out = [1] * size
         self.size = size
-
-        self.lockNuovo = Lock()
-        self.conditionNuovo = Condition(self.lock)
-
  #
  # Data in input una posizione in In, restituisce la posizione omologa in Out
  #
@@ -99,23 +95,17 @@ class DischiConcentrici():
             return self.Out[self._om(i)]
         elif d == 1:
             return self.In[i]
-""" 
-Si osservi che il codice del metodo get(i,d) non è
-robusto rispetti a eventuali operazioni di shift
-avvenute durante la fase di attesa bloccante. In
-particolare, supponi che un certo thread T invochi
-l’operazione get(k,0) e si blocchi in
-attesa, e che nel frattempo un thread S modifichi il valore di shiftAttuale passando dal valore precedente n a un
-nuovo valore m.
-Quando T uscirà dalla fase di attesa bloccante, get(k,0) restituirà il valore di Out[(k + m) % self.size],
-anzichè Out[(i + n) % self.size].
-Si scriva una versione del metodo get denominata oldget tale per cui, nel caso shiftAttuale variasse durante una
-eventuale fase di attesa bloccante, l’attesa bloccante continui in ogni caso fino a che shiftAttuale non torna al valore
-che aveva nel momento in cui oldget era stata inizialmente invocata. Si modifichino le altre parti del codice
-pre-esistente laddove lo si ritenga necessario.
-"""
-
-
+    """ 
+    Si osservi che il codice del metodo get(i,d) non è robusto rispetti a eventuali operazioni di shift avvenute durante la fase di attesa bloccante. In
+    particolare, supponi che un certo thread T invochi l’operazione get(k,0) e si blocchi in attesa, e che nel frattempo un thread S modifichi il valore
+    di shiftAttuale passando dal valore precedente n a un nuovo valore m.
+    Quando T uscirà dalla fase di attesa bloccante, get(k,0) restituirà il valore di Out[(k + m) % self.size], anzichè Out[(i + n) % self.size].
+    Si scriva una versione del metodo get denominata oldget tale per cui, nel caso shiftAttuale variasse durante una
+    eventuale fase di attesa bloccante, l’attesa bloccante continui in ogni caso fino a che shiftAttuale non torna al valore
+    che aveva nel momento in cui oldget era stata inizialmente invocata. Si modifichino le altre parti del codice
+    pre-esistente laddove lo si ritenga necessario.
+    """
+    
 class ManipolatoreDischi(Thread):
 
     def __init__(self, d: DischiConcentrici):

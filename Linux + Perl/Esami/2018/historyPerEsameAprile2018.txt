@@ -1,0 +1,585 @@
+    1  g++ \#includ.c
+    2  gcc \#includ.c
+    3  apt install g++
+    4  g++ \#includ.c
+    5  apt install g++
+    6  apt-get update
+    7  apt install g++
+    8  g++ \#includ.c
+    9  gcc \#includ.c
+   10  g++ \#includ.c
+   11  g++ nclud.cpp 
+   12  ./a.out 
+   13  gcc elimina.c
+   14  ./a.out 
+   15  clear
+   16  gcc elimina.c
+   17  ./a.out 
+   18  gcc elimina.c
+   19  ./a.out 
+   20  gcc elimina.c
+   21  ./a.out 
+   22  gcc elimina.c
+   23  ./a.out 
+   24  gcc elimina.c
+   25  ./a.out 
+   26  gcc elimina.c
+   27  ./a.out 
+   28  gcc elimina.c
+   29  ./a.out 
+   30  gcc elimina.c
+   31  ./a.out 
+   32  gcc elimina.c
+   33  ./a.out 
+   34  gcc elimina.c
+   35  ./a.out 
+   36  gcc elimina.c
+   37  ./a.out 
+   38  gcc elimina.c
+   39  ./a.out 
+   40  gcc elimina.c
+   41  ./a.out 
+   42  gcc elimina.c
+   43  ./a.out 
+   44  gcc elimina.c
+   45  ./a.out 
+   46  gcc elimina.c
+   47  clear
+   48  gcc elimina.c
+   49  gcc elimina.c -o test -lm
+   50  ./test 
+   51  gcc elimina.c -o test -lm
+   52  ./test 
+   53  gcc elimina.c -o test -lm
+   54  ./test 
+   55  gcc elimina.c -o test -lm
+   56  ./test 
+   57  gcc elimina.c -o test -lm
+   58  ./test 
+   59  gcc elimina.c -o test -lm
+   60  ./test 
+   61  gcc elimina.c -o test -lm
+   62  ./test 
+   63  gcc elimina.c -o test -lm
+   64  ./test 
+   65  gcc elimina.c -o test -lm
+   66  ./test 
+   67  gcc elimina.c -o test -lm
+   68  ./test 
+   69  ls
+   70  cd
+   71  ls
+   72  cd /home
+   73  ls
+   74  cd raffaele/
+   75  ls
+   76  sudo apt update
+   77  sudo apt upgrade
+   78  ls
+   79  sudo apt update
+   80  sudo apt dist-upgrade
+   81  ls
+   82  cd /home/raffaele/
+   83  ls
+   84  ls -a
+   85  ./Gennaio2020.pl 
+   86  perl Gennaio2020.pl 
+   87  perl Gennaio2020.pl a b c d
+   88  clear
+   89  perl Gennaio2020.pl a b c d
+   90  clear
+   91  perl Gennaio2020.pl a b dmesg.log.txt 
+   92  clear
+   93  perl Gennaio2020.pl a b dmesg.log.txt 
+   94  clear
+   95  perl Gennaio2020.pl a b dmesg.log.txt 
+   96  perl Gennaio2020.pl z b dmesg.log.txt 
+   97  clear
+   98  perl Gennaio2020.pl z b dmesg.log.txt 
+   99  perl Gennaio2020.pl a b dmesg.log.txt 
+  100  perl Gennaio2020.pl esame b dmesg.log.txt 
+  101  clear
+  102  perl Gennaio2020.pl esame b dmesg.log.txt 
+  103  clear
+  104  perl Gennaio2020.pl esame -t dmesg.log.txt 
+  105  clear
+  106  perl Gennaio2020.pl esame -t dmesg.log.txt 
+  107  perl Gennaio2020.pl esame -t=kernel dmesg.log.txt 
+  108  perl Gennaio2020.pl francesco -t=kernel dmesg.log.txt 
+  109  clear
+  110  perl Gennaio2020.pl francesco -t=kernel dmesg.log.txt 
+  111  perl Gennaio2020.pl francesco -t=NetworkManager dmesg.log.txt 
+  112  man find
+  113  clear
+  114  perl Gennaio2020.pl francesco -hw dmesg.log.txt 
+  115  clear
+  116  perl Gennaio2020.pl francesco -hw dmesg.log.txt 
+  117  clear
+  118  perl Gennaio2020.pl francesco -hw dmesg.log.txt 
+  119  clear
+  120  perl Gennaio2020.pl francesco -hw dmesg.log.txt 
+  121  perl Gennaio2020.pl francesco -t=kernel dmesg.log.txt 
+  122  whoami
+  123  date "+%Y-%m-%d"
+  124  ls
+  125  find . -iregex "g"
+  126  cat find . -iregex "g"
+  127  grep find . -iregex "g"
+  128  grep find . -iregex "gith"
+  129  clear
+  130  ls -l
+  131  ls -1 "g"
+  132  ls -l "g"
+  133  ls -l g
+  134  ls g
+  135  man ls
+  136  clear
+  137  perl Gennaio2021.pl 
+  138  perl Gennaio2021.pl . -u git
+  139  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u git
+  140  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u g
+  141  find /mnt/c/Users/raffa/Desktop -iregex "g"
+  142  grep find . -iregex "g"
+  143  find /mnt/c/Users/raffa/Desktop -iregex "g"
+  144  clear
+  145  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u g
+  146  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u genn
+  147  clear
+  148  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u genn
+  149  clear
+  150  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u genn
+  151  clear
+  152  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u genn
+  153  ls -l -R|egrep 'Gen'
+  154  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u Genn
+  155  clear
+  156  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u Genn
+  157  clear
+  158  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u Genn
+  159  man ls
+  160  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop -u Genn
+  161  man ls
+  162  man size
+  163  man find
+  164  clear
+  165  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 5 Genn
+  166  clear
+  167  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 5 Genn
+  168  clear
+  169  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 5 Genn
+  170  clear
+  171  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 5 Genn
+  172  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 0 Genn
+  173  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  174  clear
+  175  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  176  clear
+  177  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  178  clear
+  179  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  180  clear
+  181  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  182  ls -l -R|egrep Genn
+  183  clear
+  184  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  185  clear
+  186  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  187  clear
+  188  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  189  clear
+  190  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  191  clear
+  192  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  193  clear
+  194  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  195  clear
+  196  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  197  clear
+  198  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  199  clear
+  200  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  201  clear
+  202  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  203  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 10000 Genn
+  204  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  205  clear
+  206  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  207  clear
+  208  perl Gennaio2021.pl /mnt/c/Users/raffa/Desktop 1 Genn
+  209  stat
+  210  stat .
+  211  clear
+  212  lshw
+  213  clear
+  214  perl Luglio2019-2.pl -s prova
+  215  clear
+  216  perl Luglio2019-2.pl -s prova
+  217  lshw
+  218  clear
+  219  perl Luglio2019-2.pl -s prova
+  220  clear
+  221  perl Luglio2019-2.pl -s prova
+  222  perl Luglio2019-2.pl -s prova2
+  223  perl Luglio2019-2.pl -b prova2
+  224  clear
+  225  perl Luglio2019-2.pl -b prova2
+  226  clear
+  227  perl Luglio2019-2.pl -b prova2
+  228  perl Settembre2019.pl -ip file.txt.save 
+  229  clear
+  230  perl Settembre2019.pl -ip file.txt.save 
+  231  perl Settembre2019.pl -user lyssa file.txt.save 
+  232  perl Settembre2019.pl -ip file.txt.save 
+  233  perl Settembre2019.pl -user lyssa file.txt.save 
+  234  perl Settembre2019.pl -ip file.txt.save 
+  235  clear
+  236  du -ka .
+  237  clear
+  238  perl Settembre2020-2.pl 
+  239  perl Settembre2020-2.pl
+  240  clear
+  241  perl Settembre2020-2.pl
+  242  perl Settembre2020-2.pl --formats=pdf,txt
+  243  cd Esami/
+  244  perl Settembre2020-2.pl --formats=pdf,txt
+  245  perl Settembre2020-2.pl --formats=pdf,txt ..
+  246  top -elf
+  247  htop
+  248  ps
+  249  ps -n1 -b
+  250  man ps
+  251  top
+  252  top -n1 -b
+  253  clear
+  254  top -n1 -b
+  255  cd Esami/
+  256  perl Settembre2020-1.pl 
+  257  perl Settembre2020-1.pl -c root
+  258  perl Settembre2020-1.pl -m root
+  259  perl Settembre2020-1.pl -m rootd
+  260  ls -l
+  261  perl Febbraio2020.pl -c .
+  262  perl Febbraio2020.pl -c /home/
+  263  clear
+  264  perl Febbraio2020.pl -c /home/
+  265  ls -lR .
+  266  clear
+  267  perl Febbraio2020.pl -c .
+  268  clear
+  269  perl Febbraio2020.pl -c .
+  270  clear
+  271  perl Febbraio2020.pl -c .
+  272  clear
+  273  perl Febbraio2020.pl -c .
+  274  clear
+  275  perl Febbraio2020.pl -c .
+  276  perl Febbraio2020.pl -r . ita
+  277  perl Febbraio2020.pl -r . /ita/prova
+  278  clear
+  279  perl Febbraio2020.pl -r . /ita/prova
+  280  clear
+  281  perl Febbraio2020.pl -r . /ita/prova
+  282  perl Febbraio2020.pl -r . ita/prova
+  283  perl Febbraio2020.pl -r . /ita/prova
+  284  clear
+  285  find . -type f -print
+  286  find . 
+  287  perl Febbraio2020.pl -r . /ita/prova
+  288  clear
+  289  perl Febbraio2020.pl -r . /ita/prova
+  290  clear
+  291  perl Febbraio2020.pl -r . /ita/prova
+  292  clear
+  293  perl Febbraio2020.pl -r . /ita/prova
+  294  perl Febbraio2020.pl -r . /ita/prova/
+  295  perl Febbraio2020.pl -r . /.ita/.prova/
+  296  ps -elf
+  297  cat /proc/29/status
+  298  cd /proc/29/status
+  299  cd /proc/
+  300  ls
+  301  cd 39
+  302  cd 12/
+  303  ls
+  304  nano status
+  305  perl Luglio2020-1.pl 
+  306  nano /proc/46/status
+  307  perl Luglio2020-1.pl 
+  308  clear
+  309  perl Luglio2020-3.pl 
+  310  ps -elf
+  311  nano /proc/47/status
+  312  clear
+  313  perl Luglio2020-3.pl 
+  314  clear
+  315  perl Luglio2020-3.pl 
+  316  cd /proc/47
+  317  ls
+  318  cd status
+  319  nano status
+  320  nano /proc/$_/status
+  321  nano /proc/47/status
+  322  cd /proc/47/
+  323  cd /proc/
+  324  ls
+  325  ps -elf
+  326  nano /proc/216/status
+  327  perl Luglio2020-3.pl 
+  328  ps -elf
+  329  perl Luglio2020-3.pl 
+  330  ps -elf
+  331  nano /proc/240/status
+  332  perl Luglio2020-3.pl 
+  333  clear
+  334  perl Luglio2020-3.pl 
+  335  clear
+  336  perl Luglio2020-3.pl 
+  337  clear
+  338  perl Luglio2020-3.pl 
+  339  clear
+  340  ps -elf
+  341  perl Luglio2020-3.pl 
+  342  ps -elf
+  343  perl Luglio2020-3.pl 
+  344  clear
+  345  perl Luglio2020-3.pl 
+  346  clear
+  347  ps -elf
+  348  perl Luglio2020-3.pl 
+  349  clear
+  350  ps -elf
+  351  perl Luglio2020-3.pl 
+  352  clear
+  353  ps -elf
+  354  perl Luglio2020-3.pl 
+  355  clear
+  356  ps -elf
+  357  perl Luglio2020-3.pl 
+  358  nano /proc/301/status
+  359  perl Luglio2020-3.pl 
+  360  clear
+  361  perl Luglio2020-3.pl 
+  362  clear
+  363  perl Luglio2020-3.pl 
+  364  ps -elf
+  365  nano /proc/301/status
+  366  nano /proc/303/status
+  367  clear
+  368  ps -elf
+  369  nano /proc/303/status
+  370  clear
+  371  ps -elf
+  372  perl Luglio2020-3.pl 
+  373  nano /proc/301/status
+  374  perl Luglio2020-3.pl 
+  375  clear
+  376  perl Luglio2020-3.pl 
+  377  clear
+  378  perl Luglio2020-3.pl 
+  379  nano /proc/301/status
+  380  nano /proc/303/status
+  381  perl Luglio2020-3.pl 
+  382  man ls
+  383  find .
+  384  man find
+  385  find . -type
+  386  find . -type f
+  387  find . -type f -print
+  388  clear
+  389  find . -type f -print
+  390  find .
+  391  ls -aR
+  392  clear
+  393  find .
+  394  clear
+  395  find . -type f -print
+  396  find .
+  397  clear
+  398  find . -type f
+  399  ps -n1
+  400  ps -n1 -b
+  401  perl Settembre2020-1.pl -c raffaele
+  402  top -n1 -b
+  403  perl Settembre2020-1.pl -c root
+  404  ./RunningSushiBuffer.py 
+  405  perl RunningSushiBuffer.py 
+  406  perl Untitled-1.pl 
+  407  perl Febbraio2021.pl dump 192 hj 2
+  408  perl Febbraio2021.pl dump 192 hj 2 c
+  409  perl Febbraio2021.pl dump 192 hj 2 
+  410  perl Febbraio2021.pl dump 192 tcp 2 
+  411  perl Febbraio2021.pl dump.log 160.97.62.90 udp 14 
+  412  perl Febbraio2021.pl dump.log 160.97.62.90 UDP 14 
+  413  perl Febbraio2021-2.pl dump.log 216.58.205.200 443
+  414  perl Febbraio2021.pl dump.log 160.97.62.90 UDP 14 
+  415  perl Febbraio2021-2.pl dump.log 216.58.205.200 443
+  416  cat /proc/meminfo
+  417  perl Novembre2019.pl all 1 1
+  418  cat /proc/cpuinfo
+  419  perl Novembre2019.pl all 1 1
+  420  perl Novembre2019.pl cpu 1 1
+  421  cat /proc/meminfo
+  422  perl Novembre2019.pl mem 1 1
+  423  perl Novembre2019.pl all 1 1
+  424  perl Novembre2019.pl all 5 2
+  425  cat /proc/cpuinfo
+  426  perl Novembre2019.pl all 5 2
+  427  perl Novembre2019.pl all 1 1
+  428  perl Novembre2019.pl all 1 3
+  429  perl Novembre2019.pl all 1 2
+  430  perl Luglio2019-1.pl .
+  431  perl Luglio2019-1.pl 
+  432  perl Luglio2019-1.pl .
+  433  perl Luglio2019-1.pl . -b
+  434  perl Luglio2019-1.pl . -t
+  435  perl Luglio2019-1.pl . -t="ciao"
+  436  perl Luglio2019-1.pl . -t="directory"
+  437  perl Luglio2019-1.pl . 
+  438  ls -al
+  439  cd ..
+  440  perl Esami/Luglio2019-1.pl .
+  441  stat .
+  442  stat Esami/
+  443  perl Esami/Luglio2019-1.pl Esami
+  444  perl Esami/Luglio2019-1.pl Esami/
+  445  perl Esami/Luglio2019-1.pl Esami/ -t=directory
+  446  perl Esami/Luglio2019-1.pl Esami/ 
+  447  perl Esami/Luglio2019-1.pl Esami/ -t=directory
+  448  perl Esami/Luglio2019-1.pl Esami/ 
+  449  perl Esami/Luglio2019-1.pl Esami/ -b
+  450  psaux
+  451  ps aux
+  452  cd Esami/
+  453  perl Aprile2019.pl --kill=true --name=init
+  454  ps aux
+  455  kill 139
+  456  ps aux
+  457  t
+  458  perl Aprile2019.pl --kill=false --name=init
+  459  perl Aprile2019.pl --kill=false --name=ALL
+  460  perl Aprile2019.pl --kill=true --name=init
+  461  ls
+  462  cd /home
+  463  ls
+  464  cd raffaele/
+  465  ls
+  466  cd Scriva
+  467  ls
+  468  find .
+  469  perl elimina.pl --sync .
+  470  cat database.db 
+  471  rm database.db 
+  472  perl elimina.pl --sync ./Telegram\ Desktop/
+  473  perl elimina.pl --sync ./Telegram\Desktop/
+  474  perl elimina.pl --sync ./Telegram\s Desktop/
+  475  perl elimina.pl --sync ./Telegram\sDesktop/
+  476  perl elimina.pl --sync ./Telegram\ Desktop/
+  477  perl elimina.pl --sync ./RAMMap/
+  478  cat database.db 
+  479  perl elimina.pl --sync ./RAMMap/
+  480  cat database.db 
+  481  perl elimina.pl --sync ./RAMMap/
+  482  cat database.db 
+  483  perl elimina.pl --sync ./RAMMap/
+  484  cat database.db 
+  485  perl elimina.pl --sync ./RAMMap/
+  486  cat database.db 
+  487  find .
+  488  ls -al
+  489  ls -alR
+  490  tree .
+  491  ls -alR
+  492  ls .
+  493  ls -l
+  494  ls -lR
+  495  ls -l -R
+  496  ls -lR
+  497  ls -l -Rls -l -R $path|egrep '$stringa'
+  498  ls -l -R $path|egrep '$tel'
+  499  ls -l -R $path|egrep 'tel'
+  500  ls -l -R $path|egrep 'index'
+  501  ls -l -R $path|egrep 'dex'
+  502  ls -l -R $path|grep 'dex'
+  503  python3 17_03\ TCPClient.py
+  504  python3 17_03\ TCPClient.py
+  505  python3 17_03\ TCPClient.py
+  506  python3 17_03\ TCPClient.py
+  507  python3 17_03\ TCPClient.py
+  508  python3 17_03\ TCPClient.py 
+  509  netstat
+  510  apt install net-tools
+  511  netstat
+  512  python3 17_03\ TCPClient.py 
+  513  netstat
+  514  perl elimina.pl 
+  515  perl elimina.pl  --format=pdf,txt,docx
+  516  du -ka .
+  517  perl elimina.pl  --format=pdf,py
+  518  du -ka .
+  519  perl elimina.pl  --format=pdf,py
+  520  netstat
+  521  netstat -tln
+  522  python3 17_03\ TCPClient.py 
+  523  man tcpdump 
+  524  ./sendMail.py 
+  525  ls
+  526  ls .
+  527  python3 Esercizio3Client.py 
+  528  ifconfig
+  529  python3 Esercizio3Client.py 
+  530  python3 Esercizio3Server.py 
+  531  top -n1 -b
+  532  python3 17_03\ TCP
+  533  python3 17_03\ TCPClient.py 
+  534  top -n1
+  535  telnet facebook.com
+  536  telnet facebook.com 80
+  537  telnet facebook.com 443
+  538  telnet facebook.com 80
+  539  wget https://it.wikipedia.org/wiki/Wget
+  540  curl https://it.wikipedia.org/wiki/Wget
+  541  cat /proc/cpuinfo
+  542  nano 
+  543  cat  /proc/meminfo
+  544  perl Untitled-1.pl mem 1 3
+  545  cat stats.log 
+  546  cat /proc/meminfo
+  547  perl Untitled-1.pl mem 1 3
+  548  cat stats.log 
+  549  perl Untitled-1.pl mem 1 3
+  550  cat stats.log 
+  551  cd Github/SOR/Linux\ +\ Perl/Esami/2019/
+  552  stat .
+  553  perl Luglio2019-1.pl . directory
+  554  perl Luglio2019-1.pl . -b
+  555  perl Luglio2019-1.pl . -t="directory"
+  556  perl Luglio2019-1.pl . -t=\"directory\"
+  557  perl Luglio2019-1.pl . -t="directory"
+  558  stat .
+  559  perl Luglio2019-1.pl . -t="directory"
+  560  stat .
+  561  perl Luglio2019-1.pl . -t="directory"
+  562  perl Luglio2019-1.pl . -b
+  563  perl Luglio2019-1.pl .
+  564  stat . |egrep "Size:"
+  565  stat . |egrep \s+File:\s+(.+)\n\s+Size: (\d+)\s+Blocks:\s+(\d+)\s+
+  566  man grep 
+  567  lshw
+  568  sudo nano /root/.hushlogin
+  569  lshw | grep "vendor"
+  570  cd Esami/2019
+  571  perl Luglio2019-2.pl -b elimina.txt
+  572  perl Luglio2019-2.pl -s elimina.txt
+  573  perl Luglio2019-2.pl -b elimina.txt
+  574  lshw
+  575  perl Luglio2019-2.pl -b elimina.txt
+  576  cat elimina.txt 
+  577  perl Luglio2019-2.pl -b elimina.txt
+  578  rm elimina.txt 
+  579  ps aux
+  580  cd ..
+  581  cd 2018
+  582  perl Aprile2018.pl -f cd
+  583  history
+  584  hystory > elimina.txt
+  585  history > elimina.txt

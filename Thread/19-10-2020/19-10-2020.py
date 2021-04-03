@@ -9,6 +9,7 @@
 # 1)si dichiara array B di dimensione fissata [0---N-1]
 # come la facciamo la put? tieniamoci una variabile che si ricorda 
 # la prima cella disponibile => B[i]=c; i+=1;
+
 # come la facciamo la get? possiamo usare una variabile che si 
 # ricorda da quale cella ho estratto l'ultima volta => 
 # outV=out; out+=1; return B[outV];
@@ -86,7 +87,7 @@
 
 # for c in consumers:
 #     c.start()
-# con il codice fino a riga 88:
+# con il codice fino a riga 89:
 #abbiamo problemi di thread safety pesantissimi perchè
 #può benissimo succedere che mentre un produttore sta
 #innocentemente inserendo un elemento arriva un altro produttore che ti
@@ -131,8 +132,8 @@
 #             self.slotPieni -=1
 #             return returnValue
 
-# #non conviene mettere 2 lock distinti perché vuol dire che
-# # sto consentendo di prelevare mentre si inserisce mantenendo la race condition
+# non conviene mettere 2 lock distinti perché vuol dire che
+# sto consentendo di prelevare mentre si inserisce mantenendo la race condition
 
 # class Consumer(Thread):
 #     def __init(self,buffer):
@@ -167,7 +168,7 @@
 # for c in consumers:
 #     c.start()
 
-#la versione da 102 a 167 occupa cpu inutilmente
+#la versione da 102 a 169 occupa cpu inutilmente
 
 
 

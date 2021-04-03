@@ -93,7 +93,7 @@ from random import randrange
 # e creando appunto il ciclo. cambieremo proprio la disciplina di acquisizione delle bacchette in maniera che posso prendere
 # solamente entrambe le bacchette ma se una e' occupata metteremo il filosofo in attesa a prescindere
 
-#voglio fare un sistema di prenotazione delle bacchette.
+# voglio fare un sistema di prenotazione delle bacchette.
 
 class Bacchetta:
     def __init__(self):

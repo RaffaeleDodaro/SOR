@@ -1,51 +1,43 @@
 #!/usr/bin/perl
-$opzione=shift or die "opzione";
-$file=shift or die"file";
-
-if($opzione eq "-s")
+$par=shift or die $!;
+$nomefile=shift or die $!;
+@output=qx(lshw);
+if($par =~m/-s/)
 {
-    open(my $fh,">",$file)or die $!;
-    @output=qx(lshw);
-    for(my $i=0;$i<@output;$i++)
+    open($fh,">",$nomefile) or die $!;
+    print $fh @output;
+    close $fh;
+}
+elsif($par =~m/-b/)
+{
+    open($fh,"<",$nomefile) or die $!;
+    %hash;
+    %descriptionVendor;
+    while(<$fh>)
     {
-        print $fh "@output[$i]";
-        print "@output[$i]";
+        $desc;
+        if(m/\s+description:\s(\N+)/)
+        {
+            $desc=$1;
+        }
+
+        if(m/\s+vendor\:\s+(\N+)/){
+            $hash{$1}+=1;
+            $descriptionVendor{$1}="$desc.\n$descriptionVendor{$1}";
+        }
+    }
+    @sorted=sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys %hash;
+    foreach(@sorted)
+    {
+        print "$_ --> $hash{$_}\n";
+    }
+    @sorted2=sort{$a cmp $b} keys %descriptionVendor;
+    foreach(@sorted2)
+    {
+       print "$_ --> $descriptionVendor{$_}\n";
     }
     close $fh;
 }
-elsif($opzione eq "-b")
-{
-    open(my $fh,"<",$file)or die $!;
-    # Conta e stampa in ordine decrescente il numero dei dispositivi forniti per ogni
-    # vendor (a parità di numero di dispositivi, è necessario stampare il vendor in
-    # ordine alfabetico);
-    %array;
-    %description;
-    while(<$fh>)
-    {
-        chomp;
-        print $_;
-        if($_=~m/description: (.+)\n.+\n\s+vendor: (.+)/)
-        {
-            print "ciao";
-            $array{$2}+=1;
-            $description{$2}="description: $1\n $description{$2}";
-        }
-    }
-    foreach $values(sort {$array{$b}<=>$array{$a} or {$a cmp $b}} keys %array )
-    {
-        print "$values --> $array{$values}\n"
-    }
-
-    foreach $values(sort {{$a cmp $b}} keys %description )
-    {
-        print "$values --> $description{$values}\n"
-    }
-
-    # while(my($keys, $values)=each %array)
-    # {
-    #     print "$keys --> $values\n";
-    # }
-
-    close $fh;
+else{
+    die $!;
 }
