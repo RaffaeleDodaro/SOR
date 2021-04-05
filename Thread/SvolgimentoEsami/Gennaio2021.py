@@ -70,7 +70,6 @@ class DischiConcentrici():
     def shift(self, m: int):
         with self.lock:
             self.shiftAttuale += m
-            self.waitCondition.notifyAll()
 
     def set(self, i: int, v: int, d: int):
         with self.lock:
