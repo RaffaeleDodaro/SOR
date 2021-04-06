@@ -12,7 +12,12 @@ class RoundRobinLock:
         self.inAttesa = [0 for _ in range(0,N)]
         self.turnoCorrente = 0
         self.possessori = 0
+        self.idPresidente=0
 
+    def setPresident(self,id:int):
+        with self.lock:
+            self.idPresidente=id
+        
 #
 # Non c'è bisogno di particolare attenzione alla gestione del primo accesso
 #

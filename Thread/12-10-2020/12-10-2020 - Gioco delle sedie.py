@@ -46,9 +46,6 @@
 # FINO A RIGA 42 => strategia di gioco scema. tutti i thread provano ad occupare il posto 0
 # ci sono problemi di race condition
 
-# from threading import Thread
-
-
 # class Display(Thread):
 #     def __init__(self, posti):
 #         super().__init__()
@@ -134,7 +131,7 @@ class Display(Thread):
 
 class Posto:
     def __init__(self):
-        self.lock = Lock()
+        self.lock = Lock() #avro un lock per ogni posto
         self.occupato = False
 
     def libero(self):  # se non metto il semaforo qui potrebbe succedere che io vado a testare libero
@@ -153,7 +150,7 @@ class Posto:
         self.occupato = v
         self.lock.release()
     
-    #per risolvere il problema di riga 174
+    #per risolvere il problema di riga 173
     def testaEOccupa(self):
         with self.lock:
             if self.occupato:
@@ -174,7 +171,7 @@ class Partecipante(Thread):
     def run(self):
         for i in range(0, len(self.posti)):
             # PROBLEMA: con if self.posti[i].libero(): POSSIBILE RACE CONDITION per il momento tra il release di libero e l'acquire di set potrebbe esserci un context switch
-            if self.posti[i].testaEOccupa:#risolto problema 174
+            if self.posti[i].testaEOccupa():#risolto problema 174
                 print("sono il thread %s. occupo il posto %d" % (self.getName(), i))  # getName appartiene ai Thread
                 return
         print("sono il thread %s. ho perso" % (self.getName()))

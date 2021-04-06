@@ -59,14 +59,14 @@
 #tra al e john vengono eseguiti anche processi di sistema che non c'entrano.
 #il secondo motivo è che questi thread fanno anche I/O quando fa le print
 #qui abbiamo una RACE CONDITION in quanto i thread concorrono per chi deve 
-#accedere prima alla console
+#accedere prima alla console per stampare senza nessun tipo di coordinamento
 
 
-#RISOLVIAMO QUESTO BUG
+#RISOLVIAMO QUESTO BUG chiamato race condition
 #dobbiamo far sincronizzare i thread possiamo usare:
 #SPINLOCK
 #TEST & SET
-#MONITO
+#MONITOR
 #SEMAFORI
 
 #Il mio primo thread
@@ -76,15 +76,29 @@ from threading import Lock, Thread
 class Stampa:
 
     def __init__(self):
-        self.lock=Lock()# il lock permette di creare un meccanismo simil semaforo
-                        # il lock si può acquisire o rilasciare
+        self.lock=Lock()    # il lock permette di creare un meccanismo simil semaforo
+                            # il lock si può acquisire o rilasciare
 
-    def stampaStriscia(self,c,l):#self è l'oggetto stesso su cui si applica il metodo
-        self.lock.acquire()
+    # la nostra console e' la risorsa condivisa che viene acceduta senza disciplina
+    def stampaStriscia(self,c,l):   # self è l'oggetto stesso su cui si applica il metodo
+        self.lock.acquire() # aggancio una sorta di semaforo alla console
+                            # facendo in modo che chi vuole stampare prima occupa la console e pone 
+                            # il semaforo a rosso, quando finisce di stampare la console il semaforo e' verde.
+                            # se il semaforo e' rosso e arriva un secondo, terzo, quarto thread e 
+                            # trova il semaforo rosso non puo' usare la risorsa e ti devi mettere in wait e
+                            # non puoi prenotare la risorsa fino a che il semaforo non torna verde
+        
+                            # con il lock acquire prendo il lock.
+                            # il thread che arriva e trova il semaforo rosso si blocca li.
+                            # quando viene fatta la release il lock passa da rosso a verde,
+                            # un thread che si era bloccato sull'acquire viene svegliato e
+                            # puo' ripartire da li
+
         for i in range(0,l+1):#stampa l copie del carattere c
             print(c, end='',flush=True)#termina la stampa con la stringa vuota,flush dice a print di stampare subito
         print('')
-        self.lock.release()
+        self.lock.release() # quando faccio la release il semaforino passa da rosso a verde,
+                            # un eventuale thread che sta in attesa di acquisire il lock verra' sbloccato
 
 #creo 2 thread che stampano uno asterisco e l'altro trattini
 #nel costruttore troviamo s. questa s è un'istanza della classe Stampa

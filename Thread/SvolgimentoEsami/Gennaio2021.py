@@ -45,6 +45,7 @@ class DischiConcentrici():
  #
  # Data in input una posizione in In, restituisce la posizione omologa in Out
  #
+
     def _om(self, i: int):
         with self.lock:
             dprint("I:%d" % i)
@@ -52,7 +53,7 @@ class DischiConcentrici():
 
  #
  # Esempio, con len(In) = len(Out) = 10:
-# shiftAttuale = 0, dunque _om(i) = i
+ # shiftAttuale = 0, dunque _om(i) = i
  #
  # Corrispondenza tra In e Out:
  #
@@ -64,7 +65,7 @@ class DischiConcentrici():
  # Corrispondenza tra In e Out:
  #
  # In: 0 1 2 3 4 5 6 7 8 9
-# Out: 2 3 4 5 6 7 8 9 0 1
+ # Out: 2 3 4 5 6 7 8 9 0 1
  #
 
     def shift(self, m: int):
@@ -82,7 +83,6 @@ class DischiConcentrici():
                 self.Out[self._om(i)] = 0
             elif v != 0:
                 self.waitCondition.notifyAll()
-    
 
     def get(self, i: int, d: int):
         with self.lock:
@@ -94,7 +94,7 @@ class DischiConcentrici():
             return self.Out[self._om(i)]
         elif d == 1:
             return self.In[i]
-    """ 
+    """
     Si osservi che il codice del metodo get(i,d) non è robusto rispetti a eventuali operazioni di shift avvenute durante la fase di attesa bloccante. In
     particolare, supponi che un certo thread T invochi l’operazione get(k,0) e si blocchi in attesa, e che nel frattempo un thread S modifichi il valore
     di shiftAttuale passando dal valore precedente n a un nuovo valore m.
@@ -104,7 +104,8 @@ class DischiConcentrici():
     che aveva nel momento in cui oldget era stata inizialmente invocata. Si modifichino le altre parti del codice
     pre-esistente laddove lo si ritenga necessario.
     """
-    
+
+
 class ManipolatoreDischi(Thread):
 
     def __init__(self, d: DischiConcentrici):
