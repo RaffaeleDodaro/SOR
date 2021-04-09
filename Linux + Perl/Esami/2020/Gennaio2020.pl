@@ -1,62 +1,37 @@
 #!/usr/bin/perl
-die "sono piu' di 3 parametri" if ($#ARGV>2);
-
-$primoParametro=shift or die "manca il primo parametro";
-$secondoParametro=shift or die "manca il secondo parametro";
-$terzoParametro=shift or die "manca il percorso";
-if($primoParametro=~m/-/)
-{
-    $user=qx(whoami);
-}
-#print "$primoParametro $secondoParametro $terzoParametro\n";
-
-open(my $fh,"<",$terzoParametro) or die "non posso aprire il file $!";
+die $! if($#ARGV<0 or $#ARGV>2);
+$user=qx{whoami};
+$user=$1 if($user=~m/(\N+)/);
+$user= shift or die $! if($#ARGV==2);
+$options=shift or die $!;
+$path=shift or die $!;
+open($fh,"<",$path) or die $!;
 @output;
 
-
-
-while (my $line=<$fh>)
+if($options =~m/-t=\"?(\w+)\"?/)
 {
-    #chomp $line;
-    #print $line;
-    #\d+.\d+\s\d+:\d+:\d+\s([a-zA-Z]+)
-    if($line=~m/\d+.\d+\s\d+:\d+:\d+\s($primoParametro)/)
+    $tipo=$1;
+    
+    while(<$fh>)
     {
-        push @output,($line);
-        #print @output;
+        push @output, $_ if(m/.+\:\d+\s+$user\s$tipo/);
     }
 }
-close $fh;
-@tipoSubstr=split(/=/,$secondoParametro);
-
-
-
-if("-t" eq @tipoSubstr[0])
+elsif($options =~m/-hw/)
 {
-    $tipo=@tipoSubstr[1];
-    while (@output)
+    while(<$fh>)
     {
-        my $linew = shift @output;
-        if($linew=~m/\d+.\d+\s\d+:\d+:\d+\s($primoParametro)\s($tipo)/)
-        {
-            #push @output,($line);
-            print  $linew;
-        }
+        push @output, $_ if(m/\d+\.\d+\s\d+\:\d+\:\d+\s\S+\s\S+\:\s(?i)memory|dma|usb|tty/);
     }
 }
-elsif ("-hw" eq @tipoSubstr[0]) {
-    while (@output)
-    {
-        my $linew = shift @output;
-        if($linew=~m/TTY|tty|memory|MEMORY|dma|DMA|usb|USB/)
-        {
-            #push @output,($line);
-            print $linew;
-        }
-    }
+else {
+    die $!;
 }
+close $fh or die $!;
 
-
-
-$date=qx(date "+%Y-%m-%d");
-open(my <$fh>,">>",$date)
+$data=qx{date "+%Y-%m-%d"};
+$data=$1 if($data=~m/(\N+)/);
+open($fh,">",$data) or die $!;
+@reversed = reverse @output;
+print $fh "@reversed";
+close $fh or die $!;

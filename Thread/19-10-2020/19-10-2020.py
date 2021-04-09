@@ -168,7 +168,77 @@
 # for c in consumers:
 #     c.start()
 
-#la versione da 102 a 169 occupa cpu inutilmente
+
+
+
+
+
+
+
+# from threading import Thread, Lock
+# from random import random
+# from time import sleep
+
+# class BlockingQueue2020:
+#     def __init__(self, dim):
+#         self.ins = 0
+#         self.out = 0
+#         self.slotPieni = 0
+#         self.dim=dim #dimensione del buffer
+#         self.thebuffer=[None]*dim
+#         self.lock=Lock()
+
+#     def put(self,c):
+#         with self.lock:
+#             while self.slotPieni==len(self.thebuffer):
+#                 pass
+#             self.thebuffer[self.ins] = c
+#             self.ins=(self.ins+1)% len(self.thebuffer)
+#             self.slotPieni += 1
+
+#     def get(self):
+#         with self.lock:
+#             while self.slotPieni==0:
+#                 pass
+#             returnValue = self.thebuffer[self.out]
+#             self.out = (self.out+1)% len(self.thebuffer)
+#             self.slotPieni -=1
+#             return returnValue
+
+# class Consumer(Thread):
+#     def __init(self,buffer):
+#         self.queue = buffer
+#         Thread.__init__(self)
+    
+#     def run(self):
+#         while True:
+#             sleep(random()*2)
+#             self.palluzza = self.queue.get()
+#             print("sono il thread %s e ho prelevato il valore %s" % (self.getName(),self.palluzza))
+
+# class Producer(Thread):
+#     def __init(self,buffer):
+#         self.queue = buffer
+#         Thread.__init__(self)
+
+#     def run(self):
+#         while True:
+#             sleep(random()*2)
+#             self.palluzza="PALLUZZA: "+self.getName()
+#             self.queue.put(self.palluzza)
+#             print("sono il thread %s e ho prelevato il valore %s" % (self.getName(),self.palluzza))
+
+# buffer=BlockingQueue2020(10)
+# producers=[Producer(buffer) for x in range(5)]
+# consumers=[Consumer(buffer) for x in range(2)]
+
+# for p in producers:
+#     p.start()
+
+# for c in consumers:
+#     c.start()
+
+#la versione da 178 a 239 occupa cpu inutilmente
 
 
 

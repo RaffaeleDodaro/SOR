@@ -1,18 +1,14 @@
 #!/usr/bin/perl
-die "troppi argomenti" if($#ARGV>=2);
+die $! if($#ARGV>1 or $#ARGV<0);
 $tipo= shift or die $!;
 $utente = shift or die $!;
-open($fh,">","stat.log");
-@output=`top -n1 -b`;
+open($fh,">","stat.log") or die $!;
 %array;
-if($tipo=~m/-c|-C/)
+if($tipo=~m/(?i)-c/)
 {
-    for(@output)
+    for(`top -n1 -b`)
     {
-        if($_ =~ m/\d+\s+(\w+).+\s+(\d+\,\d+)\s+(\d+\,\d+)/)
-        {
-            $array{$1}+=$2;
-        }
+        $array{$1}+=$2 if($_ =~ m/\d+\s+(\w+).+\s+(\d+\,\d+)\s+(\d+\,\d+)/);
     }
     print $fh "utente $utente CPU: $array{$utente}%\n";
     foreach $user(sort{$array{$b}<=>$array{$a}} keys %array)
@@ -21,14 +17,11 @@ if($tipo=~m/-c|-C/)
         last;
     }
 }
-elsif($tipo=~m/-m|-M/)
+elsif($tipo=~m/(?i)-m/)
 {
-    for(@output)
+    for(`top -n1 -b`)
     {
-        if($_ =~ m/\d+\s+(\w+).+\s+\d+\,\d+\s+(\d+\,\d+)/)
-        {
-            $array{$1}+=$2;
-        }
+        $array{$1}+=$2 if($_ =~ m/\d+\s+(\w+).+\s+\d+\,\d+\s+(\d+\,\d+)/);
     }
     print $fh "utente $utente Mem: $array{$utente}%\n";
     foreach $user(sort{$array{$b}<=>$array{$a}} keys %array)
@@ -38,4 +31,4 @@ elsif($tipo=~m/-m|-M/)
     }
 }
 else {die $!;}
-close $fh;
+close $fh or die $!;

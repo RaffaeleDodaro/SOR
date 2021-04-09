@@ -58,6 +58,6 @@ while(<$fScommesse>)
     }
 }
 
-close $fh;
-close $fScommesse;
-close $fPartite;
+close $fh or die $!;
+close $fScommesse or die $!;
+close $fPartite or die $!;

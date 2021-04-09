@@ -1,29 +1,26 @@
 #!/usr/bin/perl
+die $! if($#ARGV>0 or $#ARGV<0);
 $formati=shift or die $!;
 $path = ".";
 $path = shift or die $! if ($#ARGV >=0);
 $f=$1 if($formati =~ m/--formats=(.+)/);
-@array=split(',', $f);
-@file=qx(du -ka $path);
 %hash;
 $somma=0;
-foreach($i=0;$i<@array;$i++)
+foreach(split(',', $f))
 {
-    foreach(@file)
+    foreach(qx(du -ka $path))
     {
-        if(m/(\d+)\s+.+\.($array[$i])/)
+        if(m/(\d+)\s+.+\.($_)/)
         {
-            $hash{$array[$i]}+=$1;
+            $hash{$_}+=$1;
             $somma+=$1;
         }
     }
 }
-
-@sorted=sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys % hash;
-foreach(@sorted)
+foreach(sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys % hash;)
 {
     print "Estensione: $_    $hash{$_}Kb\n";
 }
-open($fh,">","du.out");
+open($fh,">","du.out") or die $!;
 print $fh "$path $somma";
-close($fh);
+close($fh) or die $!;

@@ -1,12 +1,12 @@
 #!/usr/bin/perl
+die $! if (($#ARGV<0)or ($#ARGV>2));
 $path=shift or die $!;
 $par=shift or die $!;
-die $! if($par ne "-g" and $par ne "-u");
 $str=shift or die $!;
-@file=qx(ls -laR | grep "$str");
+die $! if($par ne "-g" and $par ne "-u");
 %hash;
 $somma=0;
-foreach(@file){
+foreach(qx(ls -laR | grep "$str")){
     if($par =~m/-u/)
     {
         if(m/\d+\s+(\S+)\s+\S+\s+(\d+)\s+\w+\s+/)
@@ -23,16 +23,11 @@ foreach(@file){
             $hash{$1}+=$2;
         }
     }
-    else {
-        die $!;
-    }
 }
-open(my $fh,">","results.out");
-@sorted=sort{$hash{$b}<=>$hash{$a} or $a cmp$ b} keys %hash;
-foreach(@sorted)
+open(my $fh,">","results.out") or die $!;
+foreach(sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys %hash)
 {
     print $fh "$_ $hash{$_}\n";
 }
-print $fh "---------------\n";
-print $fh "Spazio totale occupato: $somma\n";
-close $fh;
+print $fh "---------------\nSpazio totale occupato: $somma\n";
+close $fh or die $!;

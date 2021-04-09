@@ -1,11 +1,9 @@
 #!/usr/bin/perl
-@output=`ps -elf`;
 $somma=0;
-foreach(@output)
+foreach(`ps -elf`)
 {
     if(m/(?i)chrome/)
     {
-        
         if(m/\d+\s+\w+\s+\w+\s+(\d+).+/)
         {
             open($fh,"<","/proc/$1/status");

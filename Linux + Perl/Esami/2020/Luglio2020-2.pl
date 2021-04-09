@@ -13,20 +13,12 @@ foreach(@tantiValori)
     $nome="";
     while(my $line=<$fh>)
     {
-        if($line =~m/(?i)Name:\s+(\S+)\n/)
-        {
-            $nome=$1;
-        }
-        if($line =~m/(?i)VmRSS:\s+(\d+)/)
-        {
-            $nomeVmRSS{$nome}=$1;
-        }
+        $nome=$1 if($line =~m/(?i)Name:\s+(\S+)\n/);
+        $nomeVmRSS{$nome}=$1 if($line =~m/(?i)VmRSS:\s+(\d+)/);
     }
-    
-    close $fh;
+    close $fh or die $!;
 }
-@sorted=sort{$nomeVmRSS{$b}<=> $nomeVmRSS{$a} or $a cmp $b} keys %nomeVmRSS;
-foreach(@sorted)
+foreach(sort{$nomeVmRSS{$b}<=> $nomeVmRSS{$a} or $a cmp $b} keys %nomeVmRSS;)
 {
     print "$_ --> $nomeVmRSS{$_}";
 }
