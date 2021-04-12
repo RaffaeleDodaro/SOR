@@ -1,6 +1,6 @@
 # PROBLEMA DEI 5 FILOSOFI
 # ogni filosofo ha una bacchetta alla sua sx e una alla sua dx.
-# quando un filosofo vuole mangiare deve prendere entrambe le bacchette
+# quando un filosofo vuole mangiare deve prendere entrambe le bacchette.
 # un filosofo solitamente pensa, fa uno spuntino prende le bacchette e mangia. quando
 # Hegel mangia sta usando le bacchette di Schopenhauer e Marx. questo
 # implica che finquando hegel mangia Schopenhauer e Marx digiunano. un filosofo
@@ -31,14 +31,14 @@ from random import randrange
 #         super().__init__()
 #         self.posizione=pos
 #         self.t=tavolo
-#         self.name="Philip %s"%pos
+#         self.name="Philip %s" % pos
     
 #     def attesaCasuale(self,msec):
 #         sleep(randrange(msec)/1000.0)
     
 #     def pensa(self):
 #         print(f"il filosofo {self.getName()} pensa")
-#         self.attesaCasuale(1000)
+#         self.attesaCasuale(2000)
 #         print(f"il filosofo {self.getName()} smette di pensare")
     
 #     def mangia(self):#per mangiare ho bisogno di prendere la bacchetta sx e dx
@@ -51,7 +51,7 @@ from random import randrange
 #         self.t.bacchetta[(self.posizione+1)%5].prendiBacchetta() # il modulo mi serve per capire la bacchetta successiva che posso prendere
 #         print f"il filosofo {self.getName()} ha preso seconda bacchetta e mangia."
         
-#         self.attesaCasuale(500)
+#         self.attesaCasuale(1000)
         
         
 #         self.t.bacchetta[self.posizione].lasciaBacchetta()
@@ -68,7 +68,7 @@ from random import randrange
 
 # tavolo = Tavolo()
 
-# filosofi =[Filosofo(tavolo,i) for i in range(5)] #creo un array di filosofi, i e' il numero che attribuiro' ad ogni filosofo
+# filosofi = [Filosofo(tavolo,i) for i in range(5)] #creo un array di filosofi, i e' il numero che attribuiro' ad ogni filosofo
 # for f in filosofi:
 #     f.start() #faccio partire i 5 filosofi
 # ho la situazione di foto1.jpg

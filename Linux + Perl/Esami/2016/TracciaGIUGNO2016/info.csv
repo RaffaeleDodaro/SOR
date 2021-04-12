@@ -1,0 +1,6 @@
+Hostname, OS, MemoryGB, CPUcount, DiskSpace, Location
+computer1,Windows 2008 Server,8,2,160GB,cubo1
+computer2,Windows Server 2012,16,4,500GB,cubo1
+computer3,Windows Server 2008,16,2,80GB,cubo2
+computer4,Windows Server 2012,32,4,200GB,cubo2
+computer5,Windows Server 2012,8,4,400GB,cubo3

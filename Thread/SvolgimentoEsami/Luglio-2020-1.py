@@ -1,4 +1,4 @@
-from threading import Thread,RLock, Condition, get_ident
+from threading import Thread, RLock, Condition, get_ident
 from random import randint
 
 """
@@ -6,14 +6,16 @@ from random import randint
 # Questo è il codice del Thread Stampatore. E' previsto una unica istanza che effettua le stampe
 #
 """
+
+
 class Stampatore(Thread):
 
-    def __init__(self,SP):
+    def __init__(self, SP):
         super().__init__()
         self.SP = SP
 
     def run(self):
-        while(True):
+        while True:
             s = self.SP.prelevaStampa()
             print(s)
 
@@ -23,18 +25,18 @@ class Stampatore(Thread):
 #    NUMERO BASSO = MAGGIORE PRIORITA
 #
 """
-class StampaPrioritaria:
 
-    
+
+class StampaPrioritaria:
     NCODE = 3
     """
        La traccia prescrive che per le stampe a media priorità, sia possibile effettuare comunque una stampa ogni 5 a priorità più alta, 
        Mentre per le stampe a bassa priorità, questa analoga soglia è 10.
        Queste soglie sono codificate nell'array SOGLIE   
     """
-    SOGLIE = [0,5,10]
+    SOGLIE = [0, 5, 10]
 
-    def __init__(self,n):
+    def __init__(self, n):
         """
             Dimensione massima di ogni coda 
         """
@@ -66,7 +68,7 @@ class StampaPrioritaria:
         """
             Qui riempio opportunamente C, condFull e attese
         """
-        for i in range(0,self.NCODE):
+        for i in range(0, self.NCODE):
             self.C.append([])
             self.condFull.append(Condition(self.L))
             self.attese.append(0)
@@ -75,13 +77,14 @@ class StampaPrioritaria:
         """
         self.printer = Stampatore(self)
         self.printer.start()
-    
+
     """
         Metodo privato che mi restituisce len(C[0]) + len(C[1]) + len(C[2]) 
     """
+
     def __totLen(self) -> int:
         retVal = 0
-        for i in range(0,self.NCODE):
+        for i in range(0, self.NCODE):
             retVal += len(self.C[i])
         return retVal
 
@@ -91,46 +94,42 @@ class StampaPrioritaria:
         siccome c'è una stampa a priorità 1 che aspetta da 6 "giri", allora restituisco False, e cioè non posso eseguire una stampa a livello p=0
         poichè ci sono stampe a priorità più bassa, ma che aspettano da troppo tempo.
     """
-    def __noAltreSoglieSuperate(self,p : int) -> bool:
-        for q in range(p+1,self.NCODE):
+
+    def __noAltreSoglieSuperate(self, p: int) -> bool:
+        for q in range(p + 1, self.NCODE):
             if len(self.C[q]) > 0 and self.attese[q] >= self.SOGLIE[q]:
                 return False
-        return True 
-    
-    #
-    #
-    #
-    #
-    #
-    #
-    
+        return True
+
     """
         Questo metodo pone la stringa s a priorità prio nel buffer C[prio]. 
         Si mette in attesa bloccante se in C[prio] non c'è posto.
     """
+
     def stampa(self, s: str, prio: int):
         with self.L:
             while len(self.C[prio]) == self.size:
                 self.condFull[prio].wait()
             self.C[prio].append(s)
-            #print(f"{self.C[prio]}")
+            # print(f"{self.C[prio]}")
             self.condEmpty.notify()
-  
+
     """
         Il thread stampatore sceglie la prossima stampa da effettuare grazie a questo metodo 
     """
+
     def prelevaStampa(self) -> str:
         with self.L:
             """
                 Attendo se non ci sono stampe in nessuna coda
             """
             while self.__totLen() == 0:
-                self.condEmpty.wait() 
+                self.condEmpty.wait()
 
             """
                 Ciclo sulle tre code partendo da quella a priorità più alta.
             """
-            for p in range(0,self.NCODE):
+            for p in range(0, self.NCODE):
                 """
                     Posso stampare a priorità p ?
                     Per poter stampare a priorità p: 
@@ -142,7 +141,7 @@ class StampaPrioritaria:
                     """
                         OK, se sono qui, posso stampare a priorità p. Procedo ad aggiornare le attese sulle priorità da p+1 a salire
                     """
-                    for q in range(p+1,self.NCODE):
+                    for q in range(p + 1, self.NCODE):
                         if len(self.C[q]) > 0:
                             self.attese[q] += 1
                     """
@@ -164,20 +163,23 @@ class StampaPrioritaria:
 """
     ClientThread è giusto una tipologia di thread di esempio che sorteggia una priorità casuale e produce stampe a quella priorità
 """
+
+
 class clientThread(Thread):
 
-    def __init__(self,SP):
+    def __init__(self, SP):
         super().__init__()
         self.SP = SP
-        self.p = randint(0,StampaPrioritaria.NCODE-1)
+        self.p = randint(0, StampaPrioritaria.NCODE - 1)
 
     def run(self):
         print(f"Stampa n.1 del Thread {get_ident()} con priorità {self.p}")
-        self.SP.stampa(f"Stampa n.1 del Thread {get_ident()} con priorità {self.p}",self.p)
+        self.SP.stampa(f"Stampa n.1 del Thread {get_ident()} con priorità {self.p}", self.p)
         count = 1
-        while(True):
+        while (True):
             count += 1
             self.SP.stampa(f"Stampa n.{count} del Thread {get_ident()} con priorità {self.p}", self.p)
+
 
 """
     Questo è un main di esempio che crea una istanza di StampaPrioritaria e dei ClientThread che ne fanno uso
@@ -185,6 +187,5 @@ class clientThread(Thread):
 
 if __name__ == '__main__':
     stampa = StampaPrioritaria(10)
-    for t in range(0,5):
+    for t in range(0, 5):
         clientThread(stampa).start()
-            

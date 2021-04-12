@@ -1,0 +1,35 @@
+Hostname: computer1
+OS: Windows 2008 Server
+MemoryGB: 8
+CPUcount: 2
+DiskSpace: 160GB
+Location: cubo1
+
+Hostname: computer2
+OS: Windows Server 2012
+MemoryGB: 16
+CPUcount: 4
+DiskSpace: 500GB
+Location: cubo1
+
+Hostname: computer3
+OS: Windows Server 2008
+MemoryGB: 16
+CPUcount: 2
+DiskSpace: 80GB
+Location: cubo2
+
+Hostname: computer4
+OS: Windows Server 2012
+MemoryGB: 32
+CPUcount: 4
+DiskSpace: 200GB
+Location: cubo2
+
+Hostname: computer5
+OS: Windows Server 2012
+MemoryGB: 8
+CPUcount: 4
+DiskSpace: 400GB
+Location: cubo3
+

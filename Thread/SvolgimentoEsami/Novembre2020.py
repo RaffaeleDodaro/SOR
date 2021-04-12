@@ -13,26 +13,36 @@ class RoundRobinLock:
         self.inAttesa = [0 for _ in range(0, N)]
         self.turnoCorrente = 0
         self.possessori = 0
-    def setPresident(self, id: int):
-        with self.lock:
-            self.idPresidente = id
+        self.presidentiInAttesa = 0
 
-#
-# Non c'è bisogno di particolare attenzione alla gestione del primo accesso
-#
+    def setPresident(self, idx: int):
+        with self.lock:
+            self.idPresidente = idx
+
+    #
+    # Non c'è bisogno di particolare attenzione alla gestione del primo accesso
+    #
 
     def acquire(self, id: int):
         with self.lock:
             self.inAttesa[id] += 1
             # Nessun thread di ID diverso da quello del presidente, incluso l’ID del turno
             # corrente, può nel frattempo acquisire il lock.
-            while(self.possessori > 0 and self.turnoCorrente != id ):
+            while self.possessori > 0 and self.turnoCorrente != id:
                 self.conditions[id].wait()
 
             self.inAttesa[id] -= 1
             self.possessori += 1
             if debug:
                 self.__print__()
+
+    def urgentAcquire(self):
+        with self.lock:
+
+            while self.turnoCorrente != self.idPresidente:
+                self.conditions[self.idPresidente].wait()
+            self.turnoCorrente = self.idPresidente
+
 
     def release(self, id: int):
         with self.lock:
@@ -74,7 +84,6 @@ def __print__(self):
 
 
 class RoundRobinLockStarvationMitigation(RoundRobinLock):
-
     SOGLIASTARVATION = 5
 
     def __init__(self, N: int):
@@ -84,12 +93,12 @@ class RoundRobinLockStarvationMitigation(RoundRobinLock):
     def acquire(self, id: int):
         with self.lock:
             self.inAttesa[id] += 1
-            while(self.possessori > 0 and
-                    self.turnoCorrente != id or
-                    self.turnoCorrente == id and
-                    self.consecutiveOwners > self.SOGLIASTARVATION and
-                    max(self.inAttesa) > 0
-                  ):
+            while (self.possessori > 0 and
+                   self.turnoCorrente != id or
+                   self.turnoCorrente == id and
+                   self.consecutiveOwners > self.SOGLIASTARVATION and
+                   max(self.inAttesa) > 0
+            ):
                 self.conditions[id].wait()
 
             self.inAttesa[id] -= 1
@@ -132,7 +141,7 @@ class Animale(Thread):
         self.lock = R
 
     def run(self):
-        while(self.iterazioni > 0):
+        while (self.iterazioni > 0):
             self.iterazioni -= 1
             self.lock.acquire(self.idTurno)
             # self.lock.__print__()
@@ -141,6 +150,6 @@ class Animale(Thread):
 
 NGruppi = 5
 R = RoundRobinLockStarvationMitigation(NGruppi)
-#R = RoundRobinLock(NGruppi)
+# R = RoundRobinLock(NGruppi)
 for i in range(0, 60):
-    Animale(i, randint(0, NGruppi-1), R).start()
+    Animale(i, randint(0, NGruppi - 1), R).start()

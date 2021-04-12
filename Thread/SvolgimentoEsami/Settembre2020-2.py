@@ -1,4 +1,4 @@
-from threading import Thread,RLock,Condition
+from threading import Thread, RLock, Condition
 from random import random
 from time import sleep
 
@@ -6,31 +6,29 @@ from time import sleep
 # Funzione di stampa sincronizzata
 #
 plock = RLock()
+
+
 def prints(s):
     plock.acquire()
     print(s)
     plock.release()
 
+
 class DatoCondiviso:
     SOGLIAGIRI = 5
 
-    def __init__(self,v):
+    def __init__(self, v):
         super().__init__(v)
         self.numScrittoriInAttesa = 0
         self.numGiriSenzaScrittori = 0
-        self.lockNuovo=RLock()
-        self.condition=Condition()
-        self.numLettori=0
-        self.entrambiScrittori=False
-    def acquireTLock(self):
-        while(self.numLettori>3 and self.entrambiScrittori):
-            self.condition.wait()
-        self.lockNuovo.acquire()
-        
-            
+        self.lockNuovo = RLock()
+        self.condition = Condition()
+        self.numLettori = 0
+        self.tInAttesa = 0
 
-    def releaseTLock(self):
-        self.condition.notifyAll()
+
+        self.entrambiScrittori = False
+        self.conto = 0
 
     def acquireReadLock(self):
 
@@ -42,7 +40,7 @@ class DatoCondiviso:
         # * Il contatore viene incrementato solo se effettivamente ci sono
         # * scrittori in attesa.
         #
-        
+
         if self.numScrittoriInAttesa > 0:
             self.numGiriSenzaScrittori += 1
         self.lock.release()
@@ -50,11 +48,11 @@ class DatoCondiviso:
     def releaseReadLock(self):
         self.lock.acquire()
         self.numLettori -= 1
-#
-# Nella versione senza starvation, possono esserci anche dei lettori in attesa.
-# E' necessario
-# dunque svegliare tutti.
-#
+        #
+        # Nella versione senza starvation, possono esserci anche dei lettori in attesa.
+        # E' necessario
+        # dunque svegliare tutti.
+        #
         if self.numLettori == 0:
             self.condition.notify_all()
         self.lock.release()
@@ -75,19 +73,42 @@ class DatoCondiviso:
         self.condition.notify_all()
         self.lock.release()
 
+    def acquireTLock(self):
+        self.lock.acquire()
+        self.tInAttesa += 1
+        if (): #sono thread scrittore
+            self.conto += 1
+        else:
+            self.entrambiScrittori = False
+            self.conto = 0
+
+        if self.conto >= 2:
+            self.entrambiScrittori = True
+        while self.numLettori > 3 and self.entrambiScrittori:
+            self.condition.wait()
+
+        self.lock.release()
+
+    def releaseTLock(self):
+        with self.lock:
+            self.tInAttesa -= 1
+            self.condition.notifyAll()
+
+
 class Scrittore(Thread):
     maxIterations = 1000
+
     def __init__(self, i, dc):
         super().__init__()
         self.id = i
         self.dc = dc
         self.iterations = 0
-    
+
     def run(self):
         while self.iterations < self.maxIterations:
             prints("Lo scrittore %d chiede di scrivere." % self.id)
             self.dc.acquireWriteLock()
-            prints("Lo scrittore %d comincia a scrivere." % self.id )
+            prints("Lo scrittore %d comincia a scrivere." % self.id)
             sleep(random())
             self.dc.setDato(self.id)
             prints("Lo scrittore %d ha scritto." % self.id)
@@ -96,15 +117,16 @@ class Scrittore(Thread):
             sleep(random() * 5)
             self.iterations += 1
 
+
 class Lettore(Thread):
     maxIterations = 100
-    
+
     def __init__(self, i, dc):
         super().__init__()
         self.id = i
         self.dc = dc
         self.iterations = 0
-    
+
     def run(self):
         while self.iterations < self.maxIterations:
             prints("Il lettore %d Chiede di leggere." % self.id)
@@ -117,12 +139,13 @@ class Lettore(Thread):
             sleep(random() * 5)
             self.iterations += 1
 
+
 if __name__ == '__main__':
     dc = DatoCondiviso(999)
     NUMS = 5
     NUML = 5
-    scrittori = [Scrittore(i,dc) for i in range(NUMS)]
-    lettori = [Lettore(i,dc) for i in range(NUML)]
+    scrittori = [Scrittore(i, dc) for i in range(NUMS)]
+    lettori = [Lettore(i, dc) for i in range(NUML)]
     for s in scrittori:
         s.start()
     for l in lettori:
