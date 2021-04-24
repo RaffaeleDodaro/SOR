@@ -1,40 +1,30 @@
 #!/usr/bin/perl
-$history_file=shift or die $!;
-$opt=".";
-$opt=shift or die $! if($#ARGV>=0);
-$find=shift or die $! if($#ARGV>=0);
-die $! if($#ARGV>=0);
-@output=qx(cat $history_file);
-print "@output" if($opt eq ".");
-if($opt =~ m/--sort/)
-{
+die $! if($#ARGV>2);
+$file=shift or die $!;
+@output=qx{cat $file};
+$opzione="";
+$opzione=shift or die $! if($#ARGV>=0);
+print "@output" if($opzione eq "");
+if($opzione eq "--sort"){
     @sorted=sort @output;
     print "@sorted";
 }
-elsif($opt =~ m/--stat/)
-{
+elsif($opzione eq "--stat"){
     %hash;
     foreach(@output)
     {
-        if(m/\d+\s+(\S+).+/)
-        {
-            $hash{$1}+=1;
-        }
+        $hash{$1}+=1 if(m/(\S+)\s.+/)
     }
     foreach(keys %hash)
     {
         print "$_ --> $hash{$_}\n";
     }
 }
-elsif($opt =~ m/-f/)
-{
-    
+elsif($opzione eq "-f"){
+    $arg=shift or die $! if($#ARGV>=0);
     foreach(@output)
     {
-        $tutta=$_;
-        if(m/($find).+/)
-        {
-            print "$tutta";
-        }
+        print "$_\n" if(m/(^$arg)\s/);
     }
 }
+else{die $!;}

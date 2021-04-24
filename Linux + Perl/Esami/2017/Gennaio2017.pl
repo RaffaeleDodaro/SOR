@@ -2,27 +2,17 @@
 $output;
 foreach(qx{env})
 {
-    if(m/PATH=(\N+)/)
-    {
-        $output= $1;
-        last;
-    }
+    $output= $1 if(m/PATH=(\N+)/)
 }
 @splitted=split(':',$output);
 $dimTotale=0;
-# print "@splitted\n";
 foreach(@splitted)
 {
     $s=0;
-    #print "$_\n";
-    @dim = qx{ls -l $_ 2>&1};
-    foreach(@dim){
-        if(m/\S+\s\d\s\S+\s+\S+\s+(\d+)/)#\S+\s\d\s.+?\s+.+?\s+(\d+)
-        {
-            $dimTotale+=$1;
-            $s+=$1;
-        }
+    foreach(qx{ls -l $_ 2>&1}){
+        $s+=$1 if(m/\S+\s\d\s\S+\s+\S+\s+(\d+)/)
     }
     print "$_ : $s bytes\n";
+    $dimTotale+=$s;
 }
 print "TOTALE : $dimTotale bytes\n";

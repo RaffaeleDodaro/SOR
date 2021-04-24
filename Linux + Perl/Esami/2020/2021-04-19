@@ -1,0 +1,252 @@
+01.04 16:54:37 francesco kernel: [26.048667] Bluetooth: RFCOMM TTY layer initialized
+01.04 16:54:15 francesco kernel: [3.417870] hid-multitouch 0003:04F3:21F8.0001: input,hiddev0,hidraw0: USB HID v1.10 Device [ELAN Touchscreen] on usb-0000:00:14.0-6/input0
+01.04 16:54:15 francesco kernel: [3.214501] USB Video Class driver (1.1.1)
+01.04 16:54:14 francesco kernel: [2.565641] [drm] Memory usable by graphics device = 2048M
+01.04 16:54:14 francesco kernel: [2.365768] usb 3-11: SerialNumber: 200901010001
+01.04 16:54:14 francesco kernel: [2.365767] usb 3-11: Manufacturer: CN0Y2TKG7248751LA606A00
+01.04 16:54:14 francesco kernel: [2.365766] usb 3-11: Product: Integrated_Webcam_HD
+01.04 16:54:14 francesco kernel: [2.365765] usb 3-11: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+01.04 16:54:14 francesco kernel: [2.365763] usb 3-11: New USB device found, idVendor=0bda, idProduct=573c
+01.04 16:54:14 francesco kernel: [2.190510] usb 3-11: new high-speed USB device number 4 using xhci_hcd
+01.04 16:54:14 francesco kernel: [2.071557] usb 3-9: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+01.04 16:54:14 francesco kernel: [2.071556] usb 3-9: New USB device found, idVendor=8087, idProduct=07dc
+01.04 16:54:14 francesco kernel: [1.930573] usb 3-9: new full-speed USB device number 3 using xhci_hcd
+01.04 16:54:14 francesco kernel: [1.823175] hub 2-1:1.0: USB hub found
+01.04 16:54:14 francesco kernel: [1.822929] usb 2-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+01.04 16:54:14 francesco kernel: [1.822927] usb 2-1: New USB device found, idVendor=8087, idProduct=8000
+01.04 16:54:14 francesco kernel: [1.820442] usbhid: USB HID core driver
+01.04 16:54:14 root kernel: [1.812333] usb 3-6: Manufacturer: ELAN
+01.04 16:54:14 root kernel: [1.812331] usb 3-6: Product: Touchscreen
+01.04 16:54:14 root kernel: [1.812330] usb 3-6: New USB device strings: Mfr=4, Product=14, SerialNumber=0
+01.04 16:54:14 root kernel: [1.812328] usb 3-6: New USB device found, idVendor=04f3, idProduct=21f8
+01.04 16:54:14 root kernel: [1.799587] hub 1-1:1.0: USB hub found
+01.04 16:54:14 francesco kernel: [1.799251] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+01.04 16:54:14 francesco kernel: [1.799248] usb 1-1: New USB device found, idVendor=8087, idProduct=8008
+01.04 16:54:14 francesco kernel: [1.670595] usb 2-1: new high-speed USB device number 2 using ehci-pci
+01.04 16:54:14 francesco kernel: [1.670593] usb 3-6: new full-speed USB device number 2 using xhci_hcd
+01.04 16:54:14 francesco kernel: [1.650614] usb 1-1: new high-speed USB device number 2 using ehci-pci
+01.04 16:54:14 francesco kernel: [1.346225] hub 4-0:1.0: USB hub found
+01.04 16:54:14 francesco kernel: [1.346134] usb usb4: SerialNumber: 0000:00:14.0
+01.04 16:54:14 francesco kernel: [1.346134] usb usb4: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+01.04 16:54:14 francesco kernel: [1.346133] usb usb4: Product: xHCI Host Controller
+01.04 16:54:14 francesco kernel: [1.346132] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.04 16:54:14 francesco kernel: [1.346131] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003
+01.04 16:54:14 francesco kernel: [1.346100] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 4
+01.04 16:54:14 francesco kernel: [1.344379] hub 3-0:1.0: USB hub found
+01.04 16:54:14 francesco kernel: [1.344246] usb usb3: SerialNumber: 0000:00:14.0
+01.04 16:54:14 francesco kernel: [1.344246] usb usb3: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+01.04 16:54:14 francesco kernel: [1.344245] usb usb3: Product: xHCI Host Controller
+01.04 16:54:14 francesco kernel: [1.344244] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.04 16:54:14 francesco kernel: [1.344242] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+01.04 16:54:14 francesco kernel: [1.343076] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 3
+01.04 16:54:14 francesco kernel: [1.342820] hub 2-0:1.0: USB hub found
+01.04 16:54:14 francesco kernel: [1.342636] usb usb2: SerialNumber: 0000:00:1d.0
+01.04 16:54:14 francesco kernel: [1.342635] usb usb2: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+01.04 16:54:14 francesco kernel: [1.342633] usb usb2: Product: EHCI Host Controller
+01.04 16:54:14 francesco kernel: [1.342632] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.04 16:54:14 francesco kernel: [1.342630] usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+01.04 16:54:14 francesco kernel: [1.342581] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+01.04 16:54:14 francesco kernel: [1.323195] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 2
+01.04 16:54:14 francesco kernel: [1.322857] hub 1-0:1.0: USB hub found
+01.04 16:54:14 francesco kernel: [1.322666] usb usb1: SerialNumber: 0000:00:1a.0
+01.04 16:54:14 francesco kernel: [1.322665] usb usb1: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+01.04 16:54:14 francesco kernel: [1.322664] usb usb1: Product: EHCI Host Controller
+01.04 16:54:14 francesco kernel: [1.322663] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.04 16:54:14 francesco kernel: [1.322662] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+01.04 16:54:14 francesco kernel: [1.322547] ehci-pci 0000:00:1a.0: USB 2.0 started, EHCI 1.00
+01.04 16:54:14 francesco kernel: [1.306451] ehci-pci 0000:00:1a.0: new USB bus registered, assigned bus number 1
+01.04 16:54:14 francesco kernel: [1.306143] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+01.04 16:54:14 francesco kernel: [1.305595] ACPI: bus type USB registered
+01.04 16:54:14 francesco kernel: [0.105872] x86/mm: Memory block size: 128MB
+01.04 16:54:14 francesco kernel: [0.000000] Reserving Intel graphics memory at 0x00000000cd200000-0x00000000cf1fffff
+01.04 16:54:14 francesco kernel: [0.000000] Early memory node ranges
+01.04 16:54:14 francesco kernel: [0.000000] DMA [mem 0x0000000000001000-0x0000000000ffffff]
+01.03 16:32:23 francesco kernel: [51.065958] Bluetooth: RFCOMM TTY layer initialized
+01.03 16:31:34 francesco kernel: [2.351025] hid-multitouch 0003:04F3:21F8.0001: input,hiddev0,hidraw0: USB HID v1.10 Device [ELAN Touchscreen] on usb-0000:00:14.0-6/input0
+01.03 16:31:34 francesco kernel: [2.256370] USB Video Class driver (1.1.1)
+01.03 16:31:34 root kernel: [2.203598] [drm] Memory usable by graphics device = 2048M
+01.03 16:31:34 root kernel: [2.052465] usb 3-11: SerialNumber: 200901010001
+01.03 16:31:34 root kernel: [2.052464] usb 3-11: Manufacturer: CN0Y2TKG7248751LA606A00
+01.03 16:31:34 root kernel: [2.052463] usb 3-11: Product: Integrated_Webcam_HD
+01.03 16:31:34 root kernel: [2.052462] usb 3-11: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+01.03 16:31:34 root kernel: [2.052461] usb 3-11: New USB device found, idVendor=0bda, idProduct=573c
+01.03 16:31:34 root kernel: [1.873335] usb 3-11: new high-speed USB device number 4 using xhci_hcd
+01.03 16:31:34 root kernel: [1.750383] usb 3-9: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+01.03 16:31:34 root kernel: [1.750381] usb 3-9: New USB device found, idVendor=8087, idProduct=07dc
+01.03 16:31:34 root kernel: [1.609384] usb 3-9: new full-speed USB device number 3 using xhci_hcd
+01.03 16:31:34 francesco kernel: [1.495394] usbhid: USB HID core driver
+01.03 16:31:34 francesco kernel: [1.493844] hub 2-1:1.0: USB hub found
+01.03 16:31:34 francesco kernel: [1.493686] usb 2-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+01.03 16:31:34 francesco kernel: [1.493684] usb 2-1: New USB device found, idVendor=8087, idProduct=8000
+01.03 16:31:34 francesco kernel: [1.487282] usb 3-6: Manufacturer: ELAN
+01.03 16:31:34 francesco kernel: [1.487281] usb 3-6: Product: Touchscreen
+01.03 16:31:34 francesco kernel: [1.487280] usb 3-6: New USB device strings: Mfr=4, Product=14, SerialNumber=0
+01.03 16:31:34 francesco kernel: [1.487277] usb 3-6: New USB device found, idVendor=04f3, idProduct=21f8
+01.03 16:31:34 francesco kernel: [1.474116] hub 1-1:1.0: USB hub found
+01.03 16:31:34 francesco kernel: [1.473775] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+01.03 16:31:34 francesco kernel: [1.473773] usb 1-1: New USB device found, idVendor=8087, idProduct=8008
+01.03 16:31:34 francesco kernel: [1.345417] usb 2-1: new high-speed USB device number 2 using ehci-pci
+01.03 16:31:34 francesco kernel: [1.345399] usb 3-6: new full-speed USB device number 2 using xhci_hcd
+01.03 16:31:34 francesco kernel: [1.325396] usb 1-1: new high-speed USB device number 2 using ehci-pci
+01.03 16:31:34 francesco kernel: [1.021536] hub 4-0:1.0: USB hub found
+01.03 16:31:34 francesco kernel: [1.021305] usb usb4: SerialNumber: 0000:00:14.0
+01.03 16:31:34 francesco kernel: [1.021304] usb usb4: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+01.03 16:31:34 francesco kernel: [1.021303] usb usb4: Product: xHCI Host Controller
+01.03 16:31:34 francesco kernel: [1.021302] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.03 16:31:34 francesco kernel: [1.021300] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003
+01.03 16:31:34 francesco kernel: [1.021233] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 4
+01.03 16:31:34 francesco kernel: [1.019366] hub 3-0:1.0: USB hub found
+01.03 16:31:34 francesco kernel: [1.019223] usb usb3: SerialNumber: 0000:00:14.0
+01.03 16:31:34 francesco kernel: [1.019222] usb usb3: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+01.03 16:31:34 francesco kernel: [1.019221] usb usb3: Product: xHCI Host Controller
+01.03 16:31:34 francesco kernel: [1.019220] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.03 16:31:34 francesco kernel: [1.019218] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+01.03 16:31:34 francesco kernel: [1.017880] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 3
+01.03 16:31:34 francesco kernel: [1.017620] hub 2-0:1.0: USB hub found
+01.03 16:31:34 francesco kernel: [1.017435] usb usb2: SerialNumber: 0000:00:1d.0
+01.03 16:31:34 francesco kernel: [1.017434] usb usb2: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+01.03 16:31:34 francesco kernel: [1.017433] usb usb2: Product: EHCI Host Controller
+01.03 16:31:34 francesco kernel: [1.017431] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.03 16:31:34 francesco kernel: [1.017430] usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+01.03 16:31:34 francesco kernel: [1.017367] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+01.03 16:31:34 francesco kernel: [0.997846] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 2
+01.03 16:31:34 francesco kernel: [0.997558] hub 1-0:1.0: USB hub found
+01.03 16:31:34 francesco kernel: [0.997438] usb usb1: SerialNumber: 0000:00:1a.0
+01.03 16:31:34 francesco kernel: [0.997437] usb usb1: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+01.03 16:31:34 francesco kernel: [0.997436] usb usb1: Product: EHCI Host Controller
+01.03 16:31:34 francesco kernel: [0.997435] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+01.03 16:31:34 francesco kernel: [0.997434] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+01.03 16:31:34 francesco kernel: [0.997341] ehci-pci 0000:00:1a.0: USB 2.0 started, EHCI 1.00
+01.03 16:31:34 root kernel: [0.976335] ehci-pci 0000:00:1a.0: new USB bus registered, assigned bus number 1
+01.03 16:31:34 root kernel: [0.975917] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+01.03 16:31:34 root kernel: [0.975436] ACPI: bus type USB registered
+01.03 16:31:34 francesco kernel: [0.100719] x86/mm: Memory block size: 128MB
+01.03 16:31:34 francesco kernel: [0.000000] Reserving Intel graphics memory at 0x00000000cd200000-0x00000000cf1fffff
+01.03 16:31:34 francesco kernel: [0.000000] Early memory node ranges
+01.03 16:31:34 francesco kernel: [0.000000] DMA [mem 0x0000000000001000-0x0000000000ffffff]
+12.23 19:03:36 francesco kernel: [11.852615] Bluetooth: RFCOMM TTY layer initialized
+12.23 19:03:27 francesco kernel: [2.927488] hid-multitouch 0003:04F3:21F8.0001: input,hiddev0,hidraw0: USB HID v1.10 Device [ELAN Touchscreen] on usb-0000:00:14.0-6/input0
+12.23 19:03:27 francesco kernel: [2.700912] USB Video Class driver (1.1.1)
+12.23 19:03:27 francesco kernel: [2.533273] [drm] Memory usable by graphics device = 2048M
+12.23 19:03:27 francesco kernel: [2.316002] usb 1-11: SerialNumber: 200901010001
+12.23 19:03:27 francesco kernel: [2.316000] usb 1-11: Manufacturer: CN0Y2TKG7248751LA606A00
+12.23 19:03:27 francesco kernel: [2.315999] usb 1-11: Product: Integrated_Webcam_HD
+12.23 19:03:27 francesco kernel: [2.315997] usb 1-11: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+12.23 19:03:27 francesco kernel: [2.315986] usb 1-11: New USB device found, idVendor=0bda, idProduct=573c
+12.23 19:03:27 francesco kernel: [2.140039] usb 1-11: new high-speed USB device number 4 using xhci_hcd
+12.23 19:03:27 francesco kernel: [2.021107] usb 1-9: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+12.23 19:03:27 francesco kernel: [2.021105] usb 1-9: New USB device found, idVendor=8087, idProduct=07dc
+12.23 19:03:27 francesco kernel: [1.880045] usb 1-9: new full-speed USB device number 3 using xhci_hcd
+12.23 19:03:27 francesco kernel: [1.820668] hub 4-1:1.0: USB hub found
+12.23 19:03:27 francesco kernel: [1.820389] usb 4-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+12.23 19:03:27 francesco kernel: [1.820387] usb 4-1: New USB device found, idVendor=8087, idProduct=8000
+12.23 19:03:27 francesco kernel: [1.801081] hub 3-1:1.0: USB hub found
+12.23 19:03:27 francesco kernel: [1.800736] usb 3-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+12.23 19:03:27 francesco kernel: [1.800734] usb 3-1: New USB device found, idVendor=8087, idProduct=8008
+12.23 19:03:27 francesco kernel: [1.770411] usbhid: USB HID core driver
+12.23 19:03:27 francesco kernel: [1.761777] usb 1-6: Manufacturer: ELAN
+12.23 19:03:27 francesco kernel: [1.761775] usb 1-6: Product: Touchscreen
+12.23 19:03:27 francesco kernel: [1.761774] usb 1-6: New USB device strings: Mfr=4, Product=14, SerialNumber=0
+12.23 19:03:27 francesco kernel: [1.761772] usb 1-6: New USB device found, idVendor=04f3, idProduct=21f8
+12.23 19:03:27 francesco kernel: [1.672151] usb 4-1: new high-speed USB device number 2 using ehci-pci
+12.23 19:03:27 francesco kernel: [1.648134] usb 3-1: new high-speed USB device number 2 using ehci-pci
+12.23 19:03:27 francesco kernel: [1.620123] usb 1-6: new full-speed USB device number 2 using xhci_hcd
+12.23 19:03:27 francesco kernel: [1.340409] hub 4-0:1.0: USB hub found
+12.23 19:03:27 francesco kernel: [1.340200] usb usb4: SerialNumber: 0000:00:1d.0
+12.23 19:03:27 francesco kernel: [1.340199] usb usb4: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+12.23 19:03:27 francesco kernel: [1.340197] usb usb4: Product: EHCI Host Controller
+12.23 19:03:27 francesco kernel: [1.340195] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:03:27 root kernel: [1.340193] usb usb4: New USB device found, idVendor=1d6b, idProduct=0002
+12.23 19:03:27 root kernel: [1.340132] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+12.23 19:03:27 root kernel: [1.320859] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 4
+12.23 19:03:27 root kernel: [1.320457] hub 3-0:1.0: USB hub found
+12.23 19:03:27 root kernel: [1.320274] usb usb3: SerialNumber: 0000:00:1a.0
+12.23 19:03:27 root kernel: [1.320273] usb usb3: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+12.23 19:03:27 root kernel: [1.320272] usb usb3: Product: EHCI Host Controller
+12.23 19:03:27 root kernel: [1.320271] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:03:27 root kernel: [1.320269] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+12.23 19:03:27 root kernel: [1.320108] ehci-pci 0000:00:1a.0: USB 2.0 started, EHCI 1.00
+12.23 19:03:27 root kernel: [1.296811] ehci-pci 0000:00:1a.0: new USB bus registered, assigned bus number 3
+12.23 19:03:27 root kernel: [1.295934] hub 2-0:1.0: USB hub found
+12.23 19:03:27 francesco kernel: [1.295782] usb usb2: SerialNumber: 0000:00:14.0
+12.23 19:03:27 francesco kernel: [1.295781] usb usb2: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+12.23 19:03:27 francesco kernel: [1.295779] usb usb2: Product: xHCI Host Controller
+12.23 19:03:27 francesco kernel: [1.295778] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:03:27 francesco kernel: [1.295774] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003
+12.23 19:03:27 francesco kernel: [1.295733] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 2
+12.23 19:03:27 francesco kernel: [1.293509] hub 1-0:1.0: USB hub found
+12.23 19:03:27 francesco kernel: [1.293404] usb usb1: SerialNumber: 0000:00:14.0
+12.23 19:03:27 francesco kernel: [1.293403] usb usb1: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+12.23 19:03:27 francesco kernel: [1.293402] usb usb1: Product: xHCI Host Controller
+12.23 19:03:27 francesco kernel: [1.293401] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:03:27 francesco kernel: [1.293400] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+12.23 19:03:27 francesco kernel: [1.292222] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 1
+12.23 19:03:27 francesco kernel: [1.291496] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+12.23 19:03:27 francesco kernel: [1.290752] ACPI: bus type USB registered
+12.23 19:03:27 francesco kernel: [0.107460] x86/mm: Memory block size: 128MB
+12.23 19:03:27 francesco kernel: [0.000000] Reserving Intel graphics memory at 0x00000000cd200000-0x00000000cf1fffff
+12.23 19:03:27 francesco kernel: [0.000000] Early memory node ranges
+12.23 19:03:27 francesco kernel: [0.000000] DMA [mem 0x0000000000001000-0x0000000000ffffff]
+12.23 19:01:30 francesco kernel: [11.024723] Bluetooth: RFCOMM TTY layer initialized
+12.23 19:01:23 francesco kernel: [3.277122] USB Video Class driver (1.1.1)
+12.23 19:01:22 francesco kernel: [2.634632] hid-multitouch 0003:04F3:21F8.0001: input,hiddev0,hidraw0: USB HID v1.10 Device [ELAN Touchscreen] on usb-0000:00:14.0-6/input0
+12.23 19:01:22 francesco kernel: [2.624184] [drm] Memory usable by graphics device = 2048M
+12.23 19:01:22 francesco kernel: [2.397266] usb 3-11: SerialNumber: 200901010001
+12.23 19:01:22 francesco kernel: [2.397265] usb 3-11: Manufacturer: CN0Y2TKG7248751LA606A00
+12.23 19:01:22 francesco kernel: [2.397264] usb 3-11: Product: Integrated_Webcam_HD
+12.23 19:01:22 francesco kernel: [2.397262] usb 3-11: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+12.23 19:01:22 francesco kernel: [2.397260] usb 3-11: New USB device found, idVendor=0bda, idProduct=573c
+12.23 19:01:22 root kernel: [2.221952] usb 3-11: new high-speed USB device number 4 using xhci_hcd
+12.23 19:01:22 root kernel: [2.098899] usb 3-9: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+12.23 19:01:32 root kernel: [2.098897] usb 3-9: New USB device found, idVendor=8087, idProduct=07dc
+12.23 19:01:42 root kernel: [1.958017] usb 3-9: new full-speed USB device number 3 using xhci_hcd
+12.23 19:01:22 francesco kernel: [1.844180] usbhid: USB HID core driver
+12.23 19:01:22 francesco kernel: [1.838513] hub 2-1:1.0: USB hub found
+12.23 19:01:22 francesco kernel: [1.838361] usb 2-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+12.23 19:01:22 francesco kernel: [1.838359] usb 2-1: New USB device found, idVendor=8087, idProduct=8000
+12.23 19:01:22 francesco kernel: [1.835975] usb 3-6: Manufacturer: ELAN
+12.23 19:01:22 francesco kernel: [1.835974] usb 3-6: Product: Touchscreen
+12.23 19:01:22 francesco kernel: [1.835972] usb 3-6: New USB device strings: Mfr=4, Product=14, SerialNumber=0
+12.23 19:01:22 francesco kernel: [1.835970] usb 3-6: New USB device found, idVendor=04f3, idProduct=21f8
+12.23 19:01:22 francesco kernel: [1.818771] hub 1-1:1.0: USB hub found
+12.23 19:01:22 francesco kernel: [1.818415] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+12.23 19:01:22 francesco kernel: [1.818412] usb 1-1: New USB device found, idVendor=8087, idProduct=8008
+12.23 19:01:22 francesco kernel: [1.694019] usb 3-6: new full-speed USB device number 2 using xhci_hcd
+12.23 19:01:22 francesco kernel: [1.690028] usb 2-1: new high-speed USB device number 2 using ehci-pci
+12.23 19:01:22 francesco kernel: [1.670032] usb 1-1: new high-speed USB device number 2 using ehci-pci
+12.23 19:01:22 francesco kernel: [1.366901] hub 4-0:1.0: USB hub found
+12.23 19:01:22 francesco kernel: [1.366732] usb usb4: SerialNumber: 0000:00:14.0
+12.23 19:01:22 francesco kernel: [1.366731] usb usb4: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+12.23 19:01:22 francesco kernel: [1.366731] usb usb4: Product: xHCI Host Controller
+12.23 19:01:22 francesco kernel: [1.366730] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:01:22 francesco kernel: [1.366728] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003
+12.23 19:01:22 francesco kernel: [1.366698] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 4
+12.23 19:01:22 francesco kernel: [1.364202] hub 3-0:1.0: USB hub found
+12.23 19:01:22 francesco kernel: [1.363984] usb usb3: SerialNumber: 0000:00:14.0
+12.23 19:01:22 francesco kernel: [1.363983] usb usb3: Manufacturer: Linux 4.9.0-11-amd64 xhci-hcd
+12.23 19:01:22 francesco kernel: [1.363982] usb usb3: Product: xHCI Host Controller
+12.23 19:01:22 francesco kernel: [1.363981] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:01:22 francesco kernel: [1.363979] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+12.23 19:01:22 francesco kernel: [1.362648] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 3
+12.23 19:01:22 francesco kernel: [1.362345] hub 2-0:1.0: USB hub found
+12.23 19:01:22 francesco kernel: [1.362094] usb usb2: SerialNumber: 0000:00:1d.0
+12.23 19:01:22 francesco kernel: [1.362093] usb usb2: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+12.23 19:01:22 francesco kernel: [1.362091] usb usb2: Product: EHCI Host Controller
+12.23 19:01:22 francesco kernel: [1.362089] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:01:22 francesco kernel: [1.362087] usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+12.23 19:01:22 francesco kernel: [1.362022] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+12.23 19:01:22 francesco kernel: [1.342578] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 2
+12.23 19:01:22 francesco kernel: [1.342279] hub 1-0:1.0: USB hub found
+12.23 19:01:22 francesco kernel: [1.342128] usb usb1: SerialNumber: 0000:00:1a.0
+12.23 19:01:22 francesco kernel: [1.342127] usb usb1: Manufacturer: Linux 4.9.0-11-amd64 ehci_hcd
+12.23 19:01:22 francesco kernel: [1.342126] usb usb1: Product: EHCI Host Controller
+12.23 19:01:22 francesco kernel: [1.342125] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+12.23 19:01:22 francesco kernel: [1.342124] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+12.23 19:01:22 francesco kernel: [1.341989] ehci-pci 0000:00:1a.0: USB 2.0 started, EHCI 1.00
+12.23 19:01:22 francesco kernel: [1.320626] ehci-pci 0000:00:1a.0: new USB bus registered, assigned bus number 1
+12.23 19:01:22 francesco kernel: [1.320298] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+12.23 19:01:22 francesco kernel: [1.319627] ACPI: bus type USB registered
+12.23 19:01:22 francesco kernel: [0.105234] x86/mm: Memory block size: 128MB
+12.23 19:01:22 francesco kernel: [0.000000] Reserving Intel graphics memory at 0x00000000cd200000-0x00000000cf1fffff
+12.23 19:01:22 francesco kernel: [0.000000] Early memory node ranges
+12.23 19:01:22 francesco kernel: [0.000000] DMA [mem 0x0000000000001000-0x0000000000ffffff]

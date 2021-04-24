@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 die $! if($#ARGV ne 0);
 $parametro=shift or die$!;
-foreach(qx{ls ./SOR-SO-FEBBRAIO-2016/rss})
+foreach(qx{ls ./rss})
 {
     $nomeFile=$1 if(m/(\N+)/);
-    open(my $fh,"<","./SOR-SO-FEBBRAIO-2016/rss/$nomeFile") or die $!;
+    open(my $fh,"<","./rss/$nomeFile") or die $!;
     $nomeNotizia="-1";
     while(<$fh>)
     {

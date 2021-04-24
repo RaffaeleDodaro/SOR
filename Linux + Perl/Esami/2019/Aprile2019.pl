@@ -1,14 +1,14 @@
 #!/usr/bin/perl
-$kill=shift or die $!;
-$name=shift or die $!;
-$boolkill;
-$nameProcess;
+die $! if($#ARGV<0 or $# $#ARGV>1);
+$boolkill=shift or die $!;
+$boolkill=$1 if($kill ~= m/--kill=(\w+)/);
+die $! if($kill ne "true" and $kill ne "false");
+$nameProcess=shift or die $!;
+$nameProcess=$1 if($name ~= m/--name=(\S+)/);
 @output=qx(ps aux);
-$boolkill=$1 if($kill =~ m/--kill=(\w+)/);
-$nameProcess=$1 if($name =~ m/--name=(\w+)/);
-
+$tantipid;
 die $! if ($boolkill eq "true" and $nameProcess eq "ALL");
-elsif($boolkill eq "true" and $nameProcess eq "process_name")
+if($boolkill eq "true")
 {
     @pid;
     foreach(@output)
@@ -21,22 +21,18 @@ elsif($boolkill eq "true" and $nameProcess eq "process_name")
             if($f=~m/(?i)$nameProcess/)
             {
                 print "$tutta\n";
-                push @pid, $pid;
+                $tantipid=$tantipid.$p." ";
             }
         }
     }
-    foreach(@pid)
-    {
-        qx(kill $_);
-    }
+    qx{kill $tantipid};
 }
 elsif($boolkill eq "false" and $nameProcess eq "ALL")
 {
     print "@output";
 }
-elsif($boolkill eq "false" and $nameProcess eq "process_name")
+elsif($boolkill eq "false")
 {
-    @pid;
     $cpu=0.0;
     $mem=0.0;
     foreach(@output)

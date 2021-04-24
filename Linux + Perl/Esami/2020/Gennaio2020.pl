@@ -1,37 +1,30 @@
 #!/usr/bin/perl
 die $! if($#ARGV<0 or $#ARGV>2);
-$user=qx{whoami};
-$user=$1 if($user=~m/(\N+)/);
-$user= shift or die $! if($#ARGV==2);
-$options=shift or die $!;
+$user =qx{whoami};
+$user=$1 if($user =~ m/(\N+)/);
+$user=shift or die $! if($#ARGV==2);
+$option=shift or die $!;
 $path=shift or die $!;
-open($fh,"<",$path) or die $!;
-@output;
-
-if($options =~m/-t=\"?(\w+)\"?/)
-{
-    $tipo=$1;
-    
-    while(<$fh>)
-    {
-        push @output, $_ if(m/.+\:\d+\s+$user\s$tipo/);
-    }
-}
-elsif($options =~m/-hw/)
+open($fh,"<",$path)or die $!;
+@array;
+if($option =~m/-t=\"?(\S+)\"?/)
 {
     while(<$fh>)
     {
-        push @output, $_ if(m/\d+\.\d+\s\d+\:\d+\:\d+\s\S+\s\S+\:\s(?i)memory|dma|usb|tty/);
+        push @array, $_ if(m/\d+\.\d+\s\d+\:\d+\:\d+\s$user\s$1.+/);
     }
 }
-else {
-    die $!;
+elsif($option =~m/-hw/)
+{
+    while(<$fh>)
+    {
+        push @array, $_ if(m/(?i) memory | dma | usb | tty /);
+    }
 }
+else{die $!;}
 close $fh or die $!;
-
-$data=qx{date "+%Y-%m-%d"};
-$data=$1 if($data=~m/(\N+)/);
-open($fh,">",$data) or die $!;
-@reversed = reverse @output;
-print $fh "@reversed";
+$date=qx{date "+%Y-%m-%d"};
+$date=$1 if($date=~m/(\d+\-\d+\-\d+)/);
+open($fh,">",$date)or die $!;
+print $fh reverse @array;
 close $fh or die $!;

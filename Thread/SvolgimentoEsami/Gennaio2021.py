@@ -94,6 +94,7 @@ class DischiConcentrici():
             return self.Out[self._om(i)]
         elif d == 1:
             return self.In[i]
+
     """
     Si osservi che il codice del metodo get(i,d) non è robusto rispetti a eventuali operazioni di shift avvenute durante la fase di attesa bloccante. In
     particolare, supponi che un certo thread T invochi l’operazione get(k,0) e si blocchi in attesa, e che nel frattempo un thread S modifichi il valore

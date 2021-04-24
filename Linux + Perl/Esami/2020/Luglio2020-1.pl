@@ -6,14 +6,11 @@ foreach(`ps -elf`)
     {
         if(m/\d+\s+\w+\s+\w+\s+(\d+).+/)
         {
-            open($fh,"<","/proc/$1/status");
+            open($fh,"<","/proc/$1/status")or die $!;
             while(<$fh>){
-                if(m/VmRSS\:\s+(\d+).+/)
-                {
-                    $somma+=$1;
-                }
+                $somma+=$1 if(m/VmRSS\:\s+(\d+).+/);
             }
-            close $fh;
+            close $fh or die $!;
         }
     }
 }

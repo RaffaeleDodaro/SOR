@@ -1,7 +1,7 @@
 #!/usr/bin/perl
-open($fh,"<","./TracciaGIUGNO2016/info.txt") or die $!;
-qx{rm ./TracciaGIUGNO2016/info.csv};
-open($fh2,">","./TracciaGIUGNO2016/info.csv") or die $!;
+open($fh,"<","./info.txt") or die $!;
+qx{rm ./info.csv};
+open($fh2,">","./info.csv") or die $!;
 print $fh2 "Hostname, OS, MemoryGB, CPUcount, DiskSpace, Location\n";
 while(<$fh>)
 {

@@ -18,7 +18,7 @@ foreach(@tantiValori)
     }
     close $fh or die $!;
 }
-foreach(sort{$nomeVmRSS{$b}<=> $nomeVmRSS{$a} or $a cmp $b} keys %nomeVmRSS;)
+foreach(sort{$nomeVmRSS{$b}<=> $nomeVmRSS{$a} or $a cmp $b} keys %nomeVmRSS);
 {
     print "$_ --> $nomeVmRSS{$_}";
 }

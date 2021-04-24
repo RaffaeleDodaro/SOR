@@ -13,7 +13,8 @@ class RoundRobinLock:
         self.inAttesa = [0 for _ in range(0, N)]
         self.turnoCorrente = 0
         self.possessori = 0
-        self.presidentiInAttesa = 0
+        self.idPresidente = -1
+        
 
     def setPresident(self, idx: int):
         with self.lock:
@@ -28,7 +29,7 @@ class RoundRobinLock:
             self.inAttesa[id] += 1
             # Nessun thread di ID diverso da quello del presidente, incluso l’ID del turno
             # corrente, può nel frattempo acquisire il lock.
-            while self.possessori > 0 and self.turnoCorrente != id:
+            while (self.possessori > 0 and self.turnoCorrente != id):
                 self.conditions[id].wait()
 
             self.inAttesa[id] -= 1
@@ -36,18 +37,10 @@ class RoundRobinLock:
             if debug:
                 self.__print__()
 
-    def urgentAcquire(self):
-        with self.lock:
-
-            while self.turnoCorrente != self.idPresidente:
-                self.conditions[self.idPresidente].wait()
-            self.turnoCorrente = self.idPresidente
-
-
     def release(self, id: int):
         with self.lock:
             self.possessori -= 1
-            # quando il presidente rilascia definitivamente il lock, 
+            # quando il presidente rilascia definitivamente il lock,
             # bisogna riprendere la turnazione normale dal punto in cui era stata
             # sospesa.
             if self.possessori == 0:
@@ -60,27 +53,26 @@ class RoundRobinLock:
             if debug:
                 self.__print__()
 
-
-def __print__(self):
-    with self.lock:
-        print("=" * self.turnoCorrente + "|@@|" + "=" *
-              (self.nturni - self.turnoCorrente - 1))
-        for l in range(0, max(max(self.inAttesa), self.possessori)):
-            o = ''
-            for t in range(0, self.nturni):
-                if self.turnoCorrente == t:
-                    if self.possessori > l:
-                        o = o + "|o"
+    def __print__(self):
+        with self.lock:
+            print("=" * self.turnoCorrente + "|@@|" + "=" *
+                  (self.nturni - self.turnoCorrente - 1))
+            for l in range(0, max(max(self.inAttesa), self.possessori)):
+                o = ''
+                for t in range(0, self.nturni):
+                    if self.turnoCorrente == t:
+                        if self.possessori > l:
+                            o = o + "|o"
+                        else:
+                            o = o + "|-"
+                    if self.inAttesa[t] > l:
+                        o = o + "*"
                     else:
-                        o = o + "|-"
-                if self.inAttesa[t] > l:
-                    o = o + "*"
-                else:
-                    o = o + "-"
-                if self.turnoCorrente == t:
-                    o = o + "|"
-            print(o)
-        print("")
+                        o = o + "-"
+                    if self.turnoCorrente == t:
+                        o = o + "|"
+                print(o)
+            print("")
 
 
 class RoundRobinLockStarvationMitigation(RoundRobinLock):
@@ -98,7 +90,7 @@ class RoundRobinLockStarvationMitigation(RoundRobinLock):
                    self.turnoCorrente == id and
                    self.consecutiveOwners > self.SOGLIASTARVATION and
                    max(self.inAttesa) > 0
-            ):
+                   ):
                 self.conditions[id].wait()
 
             self.inAttesa[id] -= 1

@@ -1,15 +1,15 @@
 #!/usr/bin/perl
-$par=qx(whoami);
-$par=shift or die $! if($#ARGV>=0);
+$utente=qx{whoami};
+$utente = shift or die $! if($#ARGV>=0);
 die $! if($#ARGV>=0);
-@output=qx(lsof);
+$utente=$1 if($utente =~m/(\N+)/);
+@output=qx{lsof};
+$hash;
 foreach(@output)
 {
-    if(m/bash\s+(\d+)\s+\s+$par\s+\S+\s+(\S+)\s+\S+\s+\d+\s+\d+\s+(\N+)/)
-    {
-        $type=$2;
-        $name=$3;
-        $pid=$1;
-        print "$pid\n:$type:$name\n";
-    }
+    $hash{$1}.="\n:$2:$3\n" if(m/bash\s+(\d+)\s+$utente\s+\S+\s+(\w+)\s+\d+\,\d+\s+\d+\s+\d+\s+(\N+)/)
+}
+foreach(keys %hash)
+{
+    print "$_ $hash{$_}";
 }

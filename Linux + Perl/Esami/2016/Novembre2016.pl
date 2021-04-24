@@ -5,13 +5,11 @@ $intervallo=shift or die $!;
 $vecchio=-1;
 while(True)
 {
-    @output=qx{df};
-    
-    foreach(@output)
+    foreach(qx{df})
     {
         if(m/$nome\s+\d+\s+(\d+)/)
         {   
-            if($vecchio!=$1)
+            if($vecchio ne $1)
             {
                 print $_;
                 $vecchio=$1;

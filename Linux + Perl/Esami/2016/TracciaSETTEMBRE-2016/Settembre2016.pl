@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-@fantaSquadre=qx{cat ./TracciaSETTEMBRE-2016/fantaSquadre};
+@fantaSquadre=qx{cat ./fantaSquadre};
 %puntiFantaSquadra;
 $nomeSquadra;
 foreach(@fantaSquadre)
@@ -10,9 +10,9 @@ foreach(@fantaSquadre)
         @splitted=split(",",$1);
         foreach(my $i=0;$i<scalar @splitted;$i++)
         {
-            foreach(qx{ls ./TracciaSETTEMBRE-2016/pagelle | grep "giornata"})
+            foreach(qx{ls ./pagelle | grep "giornata"})
             {
-                foreach(qx{cat ./TracciaSETTEMBRE-2016/pagelle/$_})
+                foreach(qx{cat ./pagelle/$_})
                 {
                     $puntiFantaSquadra{$nomeSquadra}+=$1 if(m/$splitted[$i]\-(\d+)/);
                 }
@@ -20,5 +20,4 @@ foreach(@fantaSquadre)
         }
     }
 }
-
 print "$_ --> $puntiFantaSquadra{$_}\n" foreach(keys %puntiFantaSquadra);

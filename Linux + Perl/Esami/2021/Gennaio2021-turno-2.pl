@@ -6,7 +6,7 @@ $str=shift or die $!;
 die $! if($par ne "-g" and $par ne "-u");
 %hash;
 $somma=0;
-foreach(qx(ls -laR | grep "$str")){
+foreach(qx(ls -laR $path | grep "$str")){
     if($par =~m/-u/)
     {
         if(m/\d+\s+(\S+)\s+\S+\s+(\d+)\s+\w+\s+/)
