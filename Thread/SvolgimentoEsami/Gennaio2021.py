@@ -115,7 +115,7 @@ class ManipolatoreDischi(Thread):
         self.d = d
 
     def run(self):
-        while(self.iterazioni > 0):
+        while self.iterazioni > 0:
             self.iterazioni -= 1
             r = random()
             i = randint(0, self.d.size-1)
