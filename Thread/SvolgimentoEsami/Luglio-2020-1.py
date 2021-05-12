@@ -108,11 +108,12 @@ class StampaPrioritaria:
 
     def stampa(self, s: str, prio: int):
         with self.L:
-            while len(self.C[prio]) == self.size:
-                self.condFull[prio].wait()
-            self.C[prio].append(s)
-            # print(f"{self.C[prio]}")
-            self.condEmpty.notify()
+            if not self.fermati:
+                while len(self.C[prio]) == self.size:
+                    self.condFull[prio].wait()
+                self.C[prio].append(s)
+                # print(f"{self.C[prio]}")
+                self.condEmpty.notify()
 
     """
         Il thread stampatore sceglie la prossima stampa da effettuare grazie a questo metodo 
@@ -157,8 +158,8 @@ class StampaPrioritaria:
                     """
                         Infine, estraggo un elemento da C[p] e lo restituisco
                     """
-                    return self.C[p].pop(0)
 
+                    return self.C[p].pop(0)
 
 """
     ClientThread è giusto una tipologia di thread di esempio che sorteggia una priorità casuale e produce stampe a quella priorità

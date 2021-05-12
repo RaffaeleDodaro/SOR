@@ -1,5 +1,6 @@
 #!/usr/bin/perl
-$path=shift || die $!;
+die $! if ($#ARGV < 0 or $#ARGV > 0);
+$path = shift || die $!;
 %utenteConto;
 %utenteIpPorta;
 foreach(qx{cat $path})

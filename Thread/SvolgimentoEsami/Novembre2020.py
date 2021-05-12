@@ -14,7 +14,6 @@ class RoundRobinLock:
         self.turnoCorrente = 0
         self.possessori = 0
         self.idPresidente = -1
-        
 
     def setPresident(self, idx: int):
         with self.lock:
@@ -29,7 +28,7 @@ class RoundRobinLock:
             self.inAttesa[id] += 1
             # Nessun thread di ID diverso da quello del presidente, incluso l’ID del turno
             # corrente, può nel frattempo acquisire il lock.
-            while (self.possessori > 0 and self.turnoCorrente != id):
+            while self.possessori > 0 and self.turnoCorrente != id:
                 self.conditions[id].wait()
 
             self.inAttesa[id] -= 1
@@ -90,7 +89,7 @@ class RoundRobinLockStarvationMitigation(RoundRobinLock):
                    self.turnoCorrente == id and
                    self.consecutiveOwners > self.SOGLIASTARVATION and
                    max(self.inAttesa) > 0
-                   ):
+            ):
                 self.conditions[id].wait()
 
             self.inAttesa[id] -= 1
