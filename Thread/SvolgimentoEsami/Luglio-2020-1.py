@@ -123,6 +123,7 @@ class StampaPrioritaria:
             """
                 Attendo se non ci sono stampe in nessuna coda
             """
+            
             while self.__totLen() == 0:
                 self.condEmpty.wait()
 

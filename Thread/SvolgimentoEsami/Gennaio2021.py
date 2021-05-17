@@ -84,6 +84,8 @@ class DischiConcentrici():
             elif v != 0:
                 self.waitCondition.notifyAll()
 
+    
+
     def get(self, i: int, d: int):
         with self.lock:
             while (d == 0 and self.Out[self._om(i)] == 0) or (d == 1 and self.In[i] == 0):

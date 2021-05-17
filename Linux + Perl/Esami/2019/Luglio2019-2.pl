@@ -1,43 +1,35 @@
 #!/usr/bin/perl
-$par=shift or die $!;
-$nomefile=shift or die $!;
-@output=qx(lshw);
-if($par =~m/-s/)
+die $! if($#ARGV<0 or $#ARGV>1);
+my $par = shift or die $!;
+my $nome=shift or die $!;
+my @output =qx{lshw};
+if($par=~/-s/)
 {
-    open($fh,">",$nomefile) or die $!;
-    print $fh @output;
+    open(my $fh,">",$nome) or die $!;
+    print $fh "@output";
     close $fh;
 }
-elsif($par =~m/-b/)
+elsif($par=~/-b/)
 {
-    open($fh,"<",$nomefile) or die $!;
-    %hash;
-    %descriptionVendor;
-    while(<$fh>)
-    {
-        $desc;
-        if(m/\s+description:\s(\N+)/)
+    open(my $fh,"<",$nome) or die $!;
+    my %hash;
+    my %vendorDesc;
+    my $vendor;
+    while(<$fh>){
+        if(m/(?i)vendor: (\N+)/)
         {
-            $desc=$1;
-        }
-
-        if(m/\s+vendor\:\s+(\N+)/){
+            $vendor=$1;
             $hash{$1}+=1;
-            $descriptionVendor{$1}="$desc.\n$descriptionVendor{$1}";
         }
+        $vendorDesc{$vendor}+="$1 \n$vendorDesc{$vendor}" if(m/\s+description:\s+(\N+)/);
     }
-    @sorted=sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys %hash;
-    foreach(@sorted)
-    {
-        print "$_ --> $hash{$_}\n";
-    }
-    @sorted2=sort{$a cmp $b} keys %descriptionVendor;
-    foreach(@sorted2)
-    {
-       print "$_ --> $descriptionVendor{$_}\n";
-    }
+
+    foreach(sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys %hash )
+    {print "$_ --> $hash{$_}\n";}
+
+    foreach(sort{$a cmp $b} keys %vendorDesc)
+    { print "$_ --> $vendorDesc{$_}\n";}
+
     close $fh;
 }
-else{
-    die $!;
-}
+else{die $!;}
