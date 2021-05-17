@@ -1,5 +1,6 @@
 #!/usr/bin/perl
-$file=shift or die $!;
+die $! if ($#ARGV < 0 or $#ARGV > 2);
+$file = shift or die $!;
 $ip=shift or die $!;
 $protocollo=shift or die $!;
 die "protocollo non accettato" if ($protocollo ne "UDP" && $protocollo ne "TCP");
@@ -24,9 +25,6 @@ while(<$fh>)
 }
 close $fh;
 open(my $fh,">","output.log") or die $!;
-foreach(reverse @array)
-{
-    print $fh $_;
-}
+foreach(reverse @array) {print $fh $_;}
 print $fh "Totale: $righe";
 close $fh;

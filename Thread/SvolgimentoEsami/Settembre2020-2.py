@@ -21,28 +21,27 @@ class DatoCondiviso:
         super().__init__(v)
         self.numScrittoriInAttesa = 0
         self.numGiriSenzaScrittori = 0
+        self.contoScrittori = 0
+        self.lockScrittore = False
         self.lockNuovo = RLock()
-        self.condition = Condition()
-        self.numLettori = 0
-        self.tInAttesa = 0
-
-
-        self.entrambiScrittori = False
-        self.conto = 0
+        self.conditionNuova = Condition(self.lockNuovo)
 
     def acquireReadLock(self):
 
         self.lock.acquire()
-        while self.ceUnoScrittore or (self.numScrittoriInAttesa > 0 and self.numGiriSenzaScrittori > self.SOGLIAGIRI):
-            self.condition.wait()
-        self.numLettori += 1
-        #
-        # * Il contatore viene incrementato solo se effettivamente ci sono
-        # * scrittori in attesa.
-        #
+        if self.lockScrittore:
+            while self.ceUnoScrittore or (
+                    self.numScrittoriInAttesa > 0 and self.numGiriSenzaScrittori > self.SOGLIAGIRI):
+                self.condition.wait()
+            self.numLettori += 1
+            self.contoScrittori -= 1
+            #
+            # * Il contatore viene incrementato solo se effettivamente ci sono
+            # * scrittori in attesa.
+            #
 
-        if self.numScrittoriInAttesa > 0:
-            self.numGiriSenzaScrittori += 1
+            if self.numScrittoriInAttesa > 0:
+                self.numGiriSenzaScrittori += 1
         self.lock.release()
 
     def releaseReadLock(self):
@@ -55,44 +54,42 @@ class DatoCondiviso:
         #
         if self.numLettori == 0:
             self.condition.notify_all()
+        self.conditionNuova.notify_all()
         self.lock.release()
 
     def acquireWriteLock(self):
         self.lock.acquire()
+        self.lockScrittore = True
         self.numScrittoriInAttesa += 1
         while self.numLettori > 0 or self.ceUnoScrittore:
             self.condition.wait()
         self.ceUnoScrittore = True
         self.numScrittoriInAttesa -= 1
         self.numGiriSenzaScrittori = 0
+        self.contoScrittori += 1
         self.lock.release()
 
     def releaseWriteLock(self):
         self.lock.acquire()
         self.ceUnoScrittore = False
         self.condition.notify_all()
+        if self.contoScrittori < 2:
+            self.conditionNuova.notify_all()
         self.lock.release()
 
     def acquireTLock(self):
-        self.lock.acquire()
-        self.tInAttesa += 1
-        if (): #sono thread scrittore
-            self.conto += 1
-        else:
-            self.entrambiScrittori = False
-            self.conto = 0
-
-        if self.conto >= 2:
-            self.entrambiScrittori = True
-        while self.numLettori > 3 and self.entrambiScrittori:
-            self.condition.wait()
-
-        self.lock.release()
+        with self.lockNuovo:
+            if self.lockScrittore:
+                self.tInAttesa += 1
+                while self.numLettori > 3 and self.contoScrittori >= 2:
+                    self.conditionNuova.wait()
+                self.tInAttesa -= 1
+                self.numT += 1
 
     def releaseTLock(self):
-        with self.lock:
-            self.tInAttesa -= 1
-            self.condition.notifyAll()
+        with self.lockNuovo:
+            self.numT -= 1
+            self.lockScrittore = False
 
 
 class Scrittore(Thread):

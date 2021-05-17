@@ -1,27 +1,28 @@
 #!/usr/bin/perl
-die "pochi parametri" if($#ARGV<0);
-$path=shift or die("manca path");
-$intero=shift or die("manca intero");
-$stringa=shift or die("manca la stringa");
-die "troppi parametri" if($#ARGV>=0);
-@risultato=qx(ls -lR $path|egrep '$stringa');
-my $somma=0;
+die $! if($#ARGV<0 or $#ARGV>2);
+$path=shift or die $!;
+$intero=shift or die $!;
+$stringa=shift or die $!;
 %hash;
-
-foreach(@risultato){
-    if(m/\w+\s+(\d+\d+)\s+\w+/)
+$somma=0;
+foreach(qx{ls -lR $path})
+{
+    if(m/.+\s\d+\s\w+\s\w+\s+(\d+)\s\w+\s+\d+\s\d+\:\d+\s(\N+)/)
     {
-        if($1 >= $intero)
+        $dim=$1;
+        $nome=$2;
+        if($2 =~ m/$stringa/)
         {
-            $hash{$_}=$1;
-            $somma+=$1;
+            if($dim>=$intero)
+            {
+                $somma+=$dim;
+                $hash{$nome} = $dim;
+            }
         }
     }
 }
-open(my $fh,">","results.out") or die "non lo apro";
-foreach $size (sort{$hash{$a}<=>$hash{$b} or $a cmp $b} keys %hash)
-{
-    print $fh "$size --> $hash{$size}.\n";
-}
+open($fh,">","results.out") or die $!;
+foreach(sort{$hash{$b}<=>$hash{$a} or $a cmp $b} keys %hash)
+{print $fh "$_ --> $hash{$_}\n";}
 print $fh "------------------------------\nDimensione totale: $somma\n";
 close $fh or die "non lo chiudo";

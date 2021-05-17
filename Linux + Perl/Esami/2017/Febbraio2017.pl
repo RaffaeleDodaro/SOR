@@ -1,5 +1,6 @@
 #!/usr/bin/perl
-$name=shift or die $!;
+die $! if ($#ARGV < 0 or $#ARGV > 1);
+$name = shift or die $!;
 $conto=0;
 $str="";
 foreach(qx{cat ~/.bash_history | nl})

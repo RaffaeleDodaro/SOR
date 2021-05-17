@@ -1,46 +1,35 @@
 #!/usr/bin/perl
-
-########## ESEGUO I CONTROLLI PIÃ™ BANALI SUGLI ARGOMENTI IN INPUT ############
-die "Too much parameters in input !" if ($#ARGV > 2);
-my $dump_filename = shift || die "Few parameters in input !";
-my $start = shift || die "Few parameters in input !";
-my $end = shift || die "Few parameters in input !";
-
-die "Parameters start and end are not valid !" if ($start < 0 || $start > $end || $end >= 24);
-
-########### INIZIALIZZO LE STRUTTURE DATI ############
-my %udp;
-my %flags;
-
-########### LEGGO IL FILE DUMP.LOG E CONTROLLO LE RIGHE ############
-open(my $dump, "<", $dump_filename) || die "Cannot open file $dump_filename !";
-$c=0;
-while(<$dump>)
-{
-  chomp $_;
-  if ($_ =~ m/(.*)\sIP\s((?:\d{1,3}\.){3}\d{1,3}(?:\.\d*){0,1})\s>\s((?:\d{1,3}\.){3}\d{1,3}(?:\.\d*){0,1}):\s(\w*)[\s\,\+].*/)
-  {
-    if ((substr $1, 0, 2) >= $start && (substr $1, 0, 2) <= $end)
-    {
-    	####### $4 Ã¨ il tipo di pacchetto --- non era richiesto stamparlo ####### 
-      if ($4 eq "UDP") { $udp{$1} = "$1 --> $2 > $3 ### $4"; }
-      else { $flags{$1} = "$1 --> $2 > $3 ### $4"; }
+die $! if ($#ARGV < 0 or $#ARGV > 2);
+$nome = shift or die $!;
+$s = shift or die $!;
+$f = shift or die $!;
+die $! if ($f > 23 or $s > $f);
+@output = qx{cat $nome};
+$sommaUDP = 0;
+$sommaNOUDP = 0;
+open(my $fh, ">>", "udp.log") or die $!;
+@array;
+foreach (@output) {
+    $r = $_;
+    if (m/(\d+)(\:\d+\:\d+\.\d+) IP (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\.(\d+) > (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\.(\d+)\: (\w+)/) {
+        $t = $7;
+        $stringa = "$1$2 --> $3.$4 > $5.$6\n";
+        if ($1 >= $S and $1 <= $f) {
+            if ($t =~ m/UDP/) {
+                print $fh "$stringa";
+                $sommaUDP += 1;
+            }
+            else {
+                push @array, $stringa;
+                $sommaNOUDP += 1;
+            }
+        }
     }
-  }
 }
-###### IL FILE RIMANE APERTO GIUSTO IL TEMPO NECESSARIO AD ESEGUIRE LE OPERAZIONI ######
-close $dump || die "Cannot close file $dump_filename";
 
-########### SCRIVO SU FILE UDP.LOG ORDINATAMENTE ############
-open(my $udp_fh, ">", "udp.log") || die "Cannot open file udp.log !";
-# Attenzione al tipo di dato della chiave dell'hash. Se nel timestamp sono rimasti i caratteri come ":" e "." allora si tratta di una stringa
-# In questo caso particolare Ã¨ possibile evitare di rimuovere questi caratteri per effettuare l'ordinamento
-print $udp_fh "$udp{$_} \n" for (sort{$a cmp $b} keys %udp);  
-print $udp_fh "Totale: ", scalar keys %udp;
-close $udp_fh || die "Cannot close file udp.log";
-
-########### SCRIVO SU FILE FLAGS.LOG ORDINATAMENTE ############
-open(my $flags_fh, ">", "flags.log") || die "Cannot open file flags.log !";
-print $flags_fh "$flags{$_} \n" for (sort{$b cmp $a} keys %flags);
-print $flags_fh "Totale: ", scalar keys %flags;
-close $flags_fh || die "Cannot close file udp.log";
+print $fh "Totale: $sommaUDP\n";
+close $fh;
+open(my $fh2, ">", "flags.log") or die $!;
+print $fh2 reverse @array;
+print $fh2 "Totale: $sommaNOUDP\n";
+close $fh2;

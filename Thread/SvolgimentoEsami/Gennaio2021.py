@@ -13,6 +13,8 @@ plock = Lock()
 def sprint(s):
     with plock:
         print(s)
+
+
 #
 # Stampa solo in debug mode
 #
@@ -27,14 +29,14 @@ def dprint(s):
 class DischiConcentrici():
 
     def __init__(self, size: int):
-     #
-     # Lock interno per la gestione della struttura dati
-     #
+        #
+        # Lock interno per la gestione della struttura dati
+        #
         self.lock = RLock()
         self.waitCondition = Condition(self.lock)
-    #
-    # Tiene traccia della corrispondenza In e Out
-    #
+        #
+        # Tiene traccia della corrispondenza In e Out
+        #
         self.shiftAttuale = 0
         #
         # I due array interni
@@ -42,31 +44,32 @@ class DischiConcentrici():
         self.In = [1] * size
         self.Out = [1] * size
         self.size = size
- #
- # Data in input una posizione in In, restituisce la posizione omologa in Out
- #
+
+    #
+    # Data in input una posizione in In, restituisce la posizione omologa in Out
+    #
 
     def _om(self, i: int):
         with self.lock:
             dprint("I:%d" % i)
             return (i + self.shiftAttuale) % self.size
 
- #
- # Esempio, con len(In) = len(Out) = 10:
- # shiftAttuale = 0, dunque _om(i) = i
- #
- # Corrispondenza tra In e Out:
- #
- # In: 0 1 2 3 4 5 6 7 8 9
- # Out: 0 1 2 3 4 5 6 7 8 9
- #
- # Dopo aver invocato shift(2) ==> shiftAttuale = 2, _om(i) = (i+2) % 10
- #
- # Corrispondenza tra In e Out:
- #
- # In: 0 1 2 3 4 5 6 7 8 9
- # Out: 2 3 4 5 6 7 8 9 0 1
- #
+    #
+    # Esempio, con len(In) = len(Out) = 10:
+    # shiftAttuale = 0, dunque _om(i) = i
+    #
+    # Corrispondenza tra In e Out:
+    #
+    # In: 0 1 2 3 4 5 6 7 8 9
+    # Out: 0 1 2 3 4 5 6 7 8 9
+    #
+    # Dopo aver invocato shift(2) ==> shiftAttuale = 2, _om(i) = (i+2) % 10
+    #
+    # Corrispondenza tra In e Out:
+    #
+    # In: 0 1 2 3 4 5 6 7 8 9
+    # Out: 2 3 4 5 6 7 8 9 0 1
+    #
 
     def shift(self, m: int):
         with self.lock:
@@ -91,11 +94,11 @@ class DischiConcentrici():
             while (d == 0 and self.Out[self._om(i)] == 0) or (d == 1 and self.In[i] == 0):
                 dprint("In attesa")
                 self.waitCondition.wait()
-        dprint("Risvegliato")
-        if d == 0:
-            return self.Out[self._om(i)]
-        elif d == 1:
-            return self.In[i]
+            dprint("Risvegliato")
+            if d == 0:
+                return self.Out[self._om(i)]
+            elif d == 1:
+                return self.In[i]
 
     """
     Si osservi che il codice del metodo get(i,d) non è robusto rispetti a eventuali operazioni di shift avvenute durante la fase di attesa bloccante. In
@@ -117,10 +120,10 @@ class ManipolatoreDischi(Thread):
         self.d = d
 
     def run(self):
-        while(self.iterazioni > 0):
+        while self.iterazioni > 0:
             self.iterazioni -= 1
             r = random()
-            i = randint(0, self.d.size-1)
+            i = randint(0, self.d.size - 1)
             v = randint(0, 10)
             d = randint(0, 1)
             if r < 0.5:
@@ -130,7 +133,7 @@ class ManipolatoreDischi(Thread):
                 self.d.set(i, v, d)
             if r < 0.1:
                 self.d.shift(i)
-            sleep(random()/100)
+            sleep(random() / 100)
 
 
 D = DischiConcentrici(10)
